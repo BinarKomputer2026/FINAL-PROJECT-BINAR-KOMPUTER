@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.chat-container {
+    width: 400px;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+/* HEADER */
+.chat-header {
+    background-color: #2196f3;
+    color: white;
+    padding: 20px 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.profile-icon {
+    width: 45px;
+    height: 45px;
+
+    background-color: white;
+    color: #2196f3;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 22px;
+}
+.header-title h2 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.header-title p {
+    font-size: 13px;
+    margin-top: 4px;
+}
+.online-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 14px;
+}
+
+/* AREA CHAT */
+
+.chat-box {
+    padding: 20px;
+    height: 300px;
+    overflow-y: auto;
+}
+
+
+/* PESAN */
+
+.message {
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    max-width: 75%;
+}
+
+.ai-message {
+    background-color: #eeeeee;
+    margin-right: auto;
+}
+
+.user-message {
+    background-color: #2196f3;
+    color: white;
+    margin-left: auto;
+}
+
+
+/* QUICK REPLY */
+
+.quick-replies {
+    padding: 10px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.quick-replies button {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+
+/* INPUT */
+
+.chat-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.chat-input button {
+    margin-left: 8px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #2196f3;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+} 
+.quick-replies button:hover {
+    background-color: #dcdcdc;
+    transform: scale(1.05);
+}

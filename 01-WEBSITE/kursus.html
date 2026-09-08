@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Program Microsoft Office | Binar Komputer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================
+           HALAMAN KURSUS
+        ========================== */
+
+        .course-page {
+            background: #f5fcff;
+            min-height: 100vh;
+        }
+
+        .course-hero {
+            padding: 90px 20px 70px;
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(34, 201, 239, 0.18),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(83, 218, 246, 0.20),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #eefbff 100%
+                );
+        }
+
+        .course-label {
+            display: inline-block;
+            color: #078eb5;
+            background: #dff8ff;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .course-hero h1 {
+            color: #164e63;
+            font-size: clamp(36px, 6vw, 58px);
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .course-hero h1 span {
+            color: #14b9e4;
+        }
+
+        .course-hero p {
+            max-width: 700px;
+            margin: auto;
+            color: #62818e;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           PILIHAN PAKET
+        ========================== */
+
+        .course-packages {
+            padding: 75px 7%;
+            background: #ffffff;
+        }
+
+        .course-heading {
+            max-width: 750px;
+            margin: 0 auto 45px;
+            text-align: center;
+        }
+
+        .course-heading span {
+            color: #0db2db;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .course-heading h2 {
+            color: #164e63;
+            font-size: 34px;
+            margin: 10px 0;
+        }
+
+        .course-heading p {
+            color: #6c8994;
+            font-size: 14px;
+        }
+
+        .package-container {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .package-card {
+            width: 100%;
+            padding: 30px;
+
+            background: #ffffff;
+
+            border: 1px solid #dff3f8;
+            border-radius: 22px;
+
+            transition: 0.3s ease;
+
+            cursor: pointer;
+
+            text-align: left;
+        }
+
+        .package-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 15px 35px rgba(26, 172, 210, 0.12);
+        }
+
+        .package-card.active {
+            border: 2px solid #18bce7;
+
+            box-shadow:
+                0 15px 35px rgba(26, 172, 210, 0.15);
+
+            transform: translateY(-5px);
+        }
+
+        .package-card.featured {
+            border: 2px solid #18bce7;
+        }
+
+        .package-card.active.featured {
+            border: 2px solid #078eb5;
+        }
+
+        .package-icon {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #e0f8ff;
+            border-radius: 15px;
+
+            font-size: 25px;
+
+            margin-bottom: 20px;
+        }
+
+        .package-card h3 {
+            color: #164e63;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .package-card p {
+            color: #6b8995;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .package-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            padding: 15px 0;
+
+            border-top: 1px solid #e1f2f6;
+            border-bottom: 1px solid #e1f2f6;
+
+            margin-bottom: 18px;
+        }
+
+        .package-info div {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+
+            font-size: 12px;
+        }
+
+        .package-info span {
+            color: #78939d;
+        }
+
+        .package-info strong {
+            color: #078eb5;
+            text-align: right;
+        }
+
+        .package-select {
+            display: block;
+
+            color: #078eb5;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            text-align: center;
+
+            padding-top: 5px;
+        }
+
+        .package-card.active .package-select {
+            color: #14b9e4;
+        }
+
+
+        /* =========================
+           DETAIL MATERI
+        ========================== */
+
+        .course-detail {
+            padding: 80px 7%;
+            background: #f5fcff;
+        }
+
+        .detail-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .detail-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .detail-title span {
+            color: #0db2db;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .detail-title h2 {
+            color: #164e63;
+            font-size: 32px;
+            margin: 10px 0;
+        }
+
+        .detail-title p {
+            color: #6c8994;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .selected-info {
+            max-width: 650px;
+            margin: 0 auto 35px;
+
+            padding: 15px 20px;
+
+            background: #e5faff;
+            border: 1px solid #cceff6;
+            border-radius: 15px;
+
+            text-align: center;
+
+            color: #078eb5;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .accordion {
+            background: #ffffff;
+
+            border: 1px solid #dff3f8;
+            border-radius: 18px;
+
+            margin-bottom: 15px;
+
+            overflow: hidden;
+        }
+
+        .accordion summary {
+            cursor: pointer;
+
+            padding: 22px 25px;
+
+            color: #164e63;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            list-style: none;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .accordion summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .accordion summary::after {
+            content: "+";
+
+            color: #08a5ce;
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+        .accordion[open] summary::after {
+            content: "−";
+        }
+
+        .accordion-content {
+            padding: 0 25px 25px;
+
+            color: #6b8995;
+
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .material-group {
+            margin-top: 18px;
+        }
+
+        .material-group:first-child {
+            margin-top: 0;
+        }
+
+        .material-group h4 {
+            color: #078eb5;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .material-group ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .material-group li {
+            margin-bottom: 5px;
+        }
+
+        .time-box {
+            display: inline-block;
+
+            margin-top: 5px;
+
+            padding: 6px 12px;
+
+            background: #effbff;
+
+            border-radius: 8px;
+
+            color: #078eb5;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .course-cta {
+            padding: 75px 20px;
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .course-cta-box {
+            max-width: 850px;
+            margin: auto;
+
+            padding: 55px 30px;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(43, 203, 239, 0.18),
+                    transparent 35%
+                ),
+                #eafaff;
+
+            border: 1px solid #d5f3f8;
+            border-radius: 28px;
+        }
+
+        .course-cta-box h2 {
+            color: #164e63;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .course-cta-box p {
+            max-width: 600px;
+            margin: 0 auto 25px;
+
+            color: #64818c;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .course-back {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            color: #078eb5;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            .package-container {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+        }
+
+        @media (max-width: 768px) {
+
+            .course-hero {
+                padding: 70px 20px 55px;
+            }
+
+            .course-hero h1 {
+                font-size: 38px;
+            }
+
+            .course-packages,
+            .course-detail {
+                padding: 65px 20px;
+            }
+
+            .course-heading h2,
+            .detail-title h2 {
+                font-size: 28px;
+            }
+
+            .package-card {
+                padding: 27px;
+            }
+
+            .accordion summary {
+                padding: 18px 20px;
+                font-size: 14px;
+            }
+
+            .accordion-content {
+                padding: 0 20px 20px;
+            }
+
+            .course-cta-box {
+                padding: 45px 22px;
+            }
+
+            .course-cta-box h2 {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="course-page">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <div class="logo-area">
+
+            <a href="index.html">
+
+                <img
+                    src="images/logo-binar.jpg"
+                    alt="Logo Binar Komputer">
+
+            </a>
+
+        </div>
+
+        <nav>
+
+            <a href="index.html">Beranda</a>
+
+            <a href="index.html#tentang">Tentang</a>
+
+            <a href="index.html#program">Program</a>
+
+            <a href="index.html#kontak">Kontak</a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="course-hero">
+
+        <span class="course-label">
+            PROGRAM PEMBELAJARAN
+        </span>
+
+        <h1>
+            Microsoft <span>Office</span>
+        </h1>
+
+        <p>
+            Pelajari Microsoft Word, Excel, dan PowerPoint
+            melalui pembelajaran bertahap, praktik, dan evaluasi
+            sesuai kebutuhanmu.
+        </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         PILIHAN PAKET
+    ========================== -->
+
+    <section class="course-packages">
+
+        <div class="course-heading">
+
+            <span>PILIH PROGRAM</span>
+
+            <h2>
+                Pilih Paket yang Sesuai
+            </h2>
+
+            <p>
+                Klik salah satu paket untuk melihat materi
+                pembelajaran secara lengkap.
+            </p>
+
+        </div>
+
+
+        <div class="package-container">
+
+
+            <!-- PAKET 10 -->
+
+            <button
+                type="button"
+                class="package-card active"
+                data-package="10"
+                onclick="showPackage('10')">
+
+                <div class="package-icon">
+                    📄
+                </div>
+
+                <h3>
+                    Office Dasar
+                </h3>
+
+                <p>
+                    Pembelajaran dasar Microsoft Word,
+                    Excel, dan PowerPoint.
+                </p>
+
+                <div class="package-info">
+
+                    <div>
+                        <span>Pertemuan</span>
+                        <strong>10 KBM</strong>
+                    </div>
+
+                    <div>
+                        <span>Total waktu</span>
+                        <strong>15 jam</strong>
+                    </div>
+
+                    <div>
+                        <span>Durasi</span>
+                        <strong>90 menit</strong>
+                    </div>
+
+                </div>
+
+                <span class="package-select">
+                    Lihat Materi →
+                </span>
+
+            </button>
+
+
+
+            <!-- PAKET 20 -->
+
+            <button
+                type="button"
+                class="package-card featured"
+                data-package="20"
+                onclick="showPackage('20')">
+
+                <div class="package-icon">
+                    💻
+                </div>
+
+                <h3>
+                    Office Dasar
+                </h3>
+
+                <p>
+                    Pembelajaran lebih mendalam dengan
+                    latihan dan evaluasi bertahap.
+                </p>
+
+                <div class="package-info">
+
+                    <div>
+                        <span>Pertemuan</span>
+                        <strong>20 KBM</strong>
+                    </div>
+
+                    <div>
+                        <span>Total waktu</span>
+                        <strong>30 jam</strong>
+                    </div>
+
+                    <div>
+                        <span>Durasi</span>
+                        <strong>90 menit</strong>
+                    </div>
+
+                </div>
+
+                <span class="package-select">
+                    Lihat Materi →
+                </span>
+
+            </button>
+
+
+
+            <!-- PAKET 24 -->
+
+            <button
+                type="button"
+                class="package-card"
+                data-package="24"
+                onclick="showPackage('24')">
+
+                <div class="package-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Microsoft Office
+                </h3>
+
+                <p>
+                    Pembelajaran lebih lengkap dengan
+                    materi lanjutan dan evaluasi akhir.
+                </p>
+
+                <div class="package-info">
+
+                    <div>
+                        <span>Pertemuan</span>
+                        <strong>24 KBM</strong>
+                    </div>
+
+                    <div>
+                        <span>Total waktu</span>
+                        <strong>48 jam</strong>
+                    </div>
+
+                    <div>
+                        <span>Durasi</span>
+                        <strong>120 menit</strong>
+                    </div>
+
+                </div>
+
+                <span class="package-select">
+                    Lihat Materi →
+                </span>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DETAIL PAKET 10
+    ====================================================== -->
+
+    <section
+        class="course-detail"
+        id="detail-10">
+
+        <div class="detail-container">
+
+            <div class="detail-title">
+
+                <span>MATERI PEMBELAJARAN</span>
+
+                <h2>
+                    Office Dasar — 10 Pertemuan
+                </h2>
+
+                <p>
+                    Program dasar untuk mempelajari Microsoft Word,
+                    Excel, dan PowerPoint melalui latihan praktik.
+                </p>
+
+            </div>
+
+            <div class="selected-info">
+                Paket 10 KBM sedang dipilih
+            </div>
+
+
+            <!-- 1 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 1 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <div class="material-group">
+
+                        <h4>Materi Pembelajaran</h4>
+
+                        <ul>
+                            <li>Manajemen file.</li>
+                            <li>Menyimpan data di flashdisk.</li>
+                            <li>Pengenalan internet.</li>
+                            <li>Download gambar.</li>
+                            <li>Membuat dokumen.</li>
+                            <li>Copy paste artikel ke dokumen.</li>
+                            <li>Mengatur ukuran kertas dan batas pengetikan.</li>
+                            <li>Menyimpan dokumen.</li>
+                            <li>Export to PDF.</li>
+                            <li>Modifikasi teks.</li>
+                        </ul>
+
+                    </div>
+
+                    <span class="time-box">
+                        ⏱ 90 menit
+                    </span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 2 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 2 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <div class="material-group">
+
+                        <h4>Materi Pembelajaran</h4>
+
+                        <ul>
+                            <li>Membuat surat.</li>
+                            <li>Listing sederhana.</li>
+                            <li>Insert Picture.</li>
+                            <li>Insert Shape.</li>
+                            <li>Insert Tabel.</li>
+                            <li>Insert Grafik.</li>
+                        </ul>
+
+                    </div>
+
+                    <span class="time-box">
+                        ⏱ 90 menit
+                    </span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 3 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 3 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <div class="material-group">
+
+                        <h4>Materi Pembelajaran</h4>
+
+                        <ul>
+                            <li>Membuat makalah.</li>
+                            <li>Penomoran halaman.</li>
+                        </ul>
+
+                    </div>
+
+                    <span class="time-box">
+                        ⏱ 90 menit
+                    </span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 4 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 4 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <div class="material-group">
+
+                        <h4>Materi Pembelajaran</h4>
+
+                        <ul>
+                            <li>Membuka dokumen.</li>
+                            <li>Mengelola workbook dan worksheet.</li>
+                            <li>Tipe data.</li>
+                            <li>Modifikasi teks.</li>
+                            <li>Mengelola tabel.</li>
+                            <li>Menyimpan dokumen.</li>
+                            <li>Mengatur ukuran kertas dan batas pengetikan.</li>
+                            <li>Export to PDF.</li>
+                        </ul>
+
+                    </div>
+
+                    <span class="time-box">
+                        ⏱ 90 menit
+                    </span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 5 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 5 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <div class="material-group">
+
+                        <h4>Materi Pembelajaran</h4>
+
+                        <ul>
+                            <li>Aritmatika dasar.</li>
+                            <li>Menambahkan objek.</li>
+                        </ul>
+
+                    </div>
+
+                    <span class="time-box">
+                        ⏱ 90 menit
+                    </span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 6 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 6 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <div class="material-group">
+
+                        <h4>Materi Pembelajaran</h4>
+
+                        <ul>
+                            <li>Aritmatika lanjutan.</li>
+                        </ul>
+
+                    </div>
+
+                    <span class="time-box">
+                        ⏱ 90 menit
+                    </span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 7 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 7 — Microsoft PowerPoint
+                </summary>
+
+                <div class="accordion-content">
+
+                    <div class="material-group">
+
+                        <h4>Materi Pembelajaran</h4>
+
+                        <ul>
+                            <li>Membuka dokumen.</li>
+                            <li>Mengelola slide.</li>
+                            <li>Menyimpan dokumen.</li>
+                            <li>Menambahkan objek.</li>
+                            <li>Transisi slide.</li>
+                            <li>Animasi objek.</li>
+                            <li>Export to PDF.</li>
+                            <li>Export to MP4.</li>
+                        </ul>
+
+                    </div>
+
+                    <span class="time-box">
+                        ⏱ 90 menit
+                    </span>
+
+                </div>
+
+            </details>
+
+
+            <!-- EVALUASI -->
+
+            <details class="accordion">
+
+                <summary>
+                    Evaluasi Akhir
+                </summary>
+
+                <div class="accordion-content">
+
+                    <div class="material-group">
+
+                        <h4>Latihan Ulangan Praktik</h4>
+
+                        <ul>
+                            <li>Microsoft Word — 30 menit.</li>
+                            <li>Microsoft Excel — 30 menit.</li>
+                            <li>Microsoft PowerPoint — 30 menit.</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="material-group">
+
+                        <h4>Ulangan Praktik</h4>
+
+                        <ul>
+                            <li>Microsoft Word — 30 menit.</li>
+                            <li>Microsoft Excel — 30 menit.</li>
+                            <li>Microsoft PowerPoint — 30 menit.</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="material-group">
+
+                        <h4>Evaluasi Akhir</h4>
+
+                        <p>
+                            Evaluasi akhir dan pengambilan sertifikat
+                            — 90 menit.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </details>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DETAIL PAKET 20
+    ====================================================== -->
+
+    <section
+        class="course-detail"
+        id="detail-20"
+        style="display:none;">
+
+        <div class="detail-container">
+
+            <div class="detail-title">
+
+                <span>MATERI PEMBELAJARAN</span>
+
+                <h2>
+                    Office Dasar — 20 Pertemuan
+                </h2>
+
+                <p>
+                    Pembelajaran lebih mendalam dengan latihan
+                    Word, Excel, PowerPoint, dan evaluasi bertahap.
+                </p>
+
+            </div>
+
+            <div class="selected-info">
+                Paket 20 KBM sedang dipilih
+            </div>
+
+
+            <!-- 1 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 1 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Manajemen file.</li>
+                        <li>Pengenalan internet.</li>
+                        <li>Membuat dokumen.</li>
+                        <li>Mengatur ukuran kertas dan batas pengetikan.</li>
+                        <li>Menyimpan dokumen.</li>
+                        <li>Modifikasi teks.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 2 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 2 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Listing.</li>
+                        <li>Find dan Replace.</li>
+                        <li>Cut, Copy dan Paste.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 3 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 3 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Borders (KOP SURAT) dan Shading.</li>
+                        <li>Mengolah Picture (Gambar).</li>
+                        <li>Menambahkan Symbol (Simbol).</li>
+                        <li>Export to PDF.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 4 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 4 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Tabulasi.</li>
+                        <li>Menambahkan Table (Tabel).</li>
+                        <li>Menambahkan Chart (Grafik).</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 5 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 5 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Mengolah Shape.</li>
+                        <li>Garis, Text Box, Bangun Datar dan Bangun Ruang.</li>
+                        <li>Menambahkan SmartArt (Diagram).</li>
+                        <li>Menambahkan Header.</li>
+                        <li>Menambahkan Footer.</li>
+                        <li>Penomoran halaman.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 6 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 6 — Evaluasi Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Latihan membuat surat.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 7 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 7 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Membuka dokumen.</li>
+                        <li>Mengelola workbook dan worksheet.</li>
+                        <li>Tipe data.</li>
+                        <li>Modifikasi teks.</li>
+                        <li>Mengelola tabel.</li>
+                        <li>Menyimpan dokumen.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 8 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 8 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Tipe data.</li>
+                        <li>Mengatur ukuran kertas dan batas pengetikan.</li>
+                        <li>Export to PDF.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 9 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 9 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Aritmatika dasar.</li>
+                        <li>Menambahkan objek.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 10 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 10 — Evaluasi Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Mengelola tabel menggunakan fungsi yang sudah diajarkan.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 11 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 11 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Menerapkan aritmatika dasar dalam tabel harga.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 12 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 12 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Menerapkan aritmatika dasar dalam tabel gaji.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 13 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 13 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Aritmatika lanjutan dalam tabel harga.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 14 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 14 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Aritmatika lanjutan dalam tabel gaji.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 15 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 15 — Evaluasi Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Mengelola tabel menggunakan fungsi yang sudah diajarkan.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 16 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 16 — Microsoft PowerPoint
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Membuka dokumen.</li>
+                        <li>Mengelola slide.</li>
+                        <li>Menyimpan dokumen.</li>
+                        <li>Menambahkan objek.</li>
+                        <li>Transisi slide.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 17 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 17 — Microsoft PowerPoint
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Animasi objek.</li>
+                        <li>Export to PDF.</li>
+                        <li>Export to MP4.</li>
+                        <li>Mencetak dokumen.</li>
+                        <li>Membuat presentasi.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 18 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 18 — Latihan Ulangan Praktik
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Latihan praktik Microsoft Word.</li>
+                        <li>Latihan praktik Microsoft Excel.</li>
+                        <li>Latihan praktik Microsoft PowerPoint.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 19 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 19 — Latihan Ulangan Praktik
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Latihan ulangan praktik Microsoft Word — 30 menit.</li>
+                        <li>Latihan ulangan praktik Microsoft Excel — 30 menit.</li>
+                        <li>Latihan ulangan praktik Microsoft PowerPoint — 30 menit.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 20 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 20 — Ulangan Praktik
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Ulangan praktik Microsoft Word — 30 menit.</li>
+                        <li>Ulangan praktik Microsoft Excel — 30 menit.</li>
+                        <li>Ulangan praktik Microsoft PowerPoint — 30 menit.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 90 menit</span>
+
+                </div>
+
+            </details>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DETAIL PAKET 24
+    ====================================================== -->
+
+    <section
+        class="course-detail"
+        id="detail-24"
+        style="display:none;">
+
+        <div class="detail-container">
+
+            <div class="detail-title">
+
+                <span>MATERI PEMBELAJARAN</span>
+
+                <h2>
+                    Microsoft Office — 24 Pertemuan
+                </h2>
+
+                <p>
+                    Program paling lengkap dengan materi Word,
+                    Excel, PowerPoint, latihan, dan evaluasi akhir.
+                </p>
+
+            </div>
+
+            <div class="selected-info">
+                Paket 24 KBM sedang dipilih
+            </div>
+
+
+            <!-- 1 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 1 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Manajemen file.</li>
+                        <li>Pengenalan internet.</li>
+                        <li>Membuat dokumen.</li>
+                        <li>Mengatur ukuran kertas dan batas pengetikan.</li>
+                        <li>Menyimpan dokumen.</li>
+                        <li>Modifikasi teks.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 2 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 2 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Listing.</li>
+                        <li>Borders dan Shading.</li>
+                        <li>Find dan Replace.</li>
+                        <li>Cut, Copy dan Paste.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 3 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 3 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Tabulasi.</li>
+                        <li>Mengolah Picture (Gambar).</li>
+                        <li>Menambahkan Symbol (Simbol).</li>
+                        <li>Export to PDF.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 4 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 4 — Evaluasi Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Latihan membuat surat.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 5 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 5 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Mengolah Shape.</li>
+                        <li>Garis, Text Box, Bangun Datar dan Bangun Ruang.</li>
+                        <li>Menambahkan Table (Tabel).</li>
+                        <li>Menambahkan Chart (Grafik).</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 6 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 6 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Menambahkan SmartArt (Diagram).</li>
+                        <li>Menambahkan Header.</li>
+                        <li>Menambahkan Footer.</li>
+                        <li>Penomoran halaman.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 7 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 7 — Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Mail Merge.</li>
+                        <li>Mencetak dokumen.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 8 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 8 — Evaluasi Microsoft Word
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Latihan membuat proposal.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 9 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 9 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Membuka dokumen.</li>
+                        <li>Mengelola workbook dan worksheet.</li>
+                        <li>Tipe data.</li>
+                        <li>Modifikasi teks.</li>
+                        <li>Mengelola tabel.</li>
+                        <li>Menyimpan dokumen.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 10 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 10 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Aritmatika dasar.</li>
+                        <li>Menerapkan aritmatika dasar dalam tabel harga.</li>
+                        <li>Menerapkan aritmatika dasar dalam tabel gaji.</li>
+                        <li>Mengatur ukuran kertas dan batas pengetikan.</li>
+                        <li>Export to PDF.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 11 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 11 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Aritmatika lanjutan.</li>
+                        <li>Absolut sel.</li>
+                        <li>Menambahkan objek.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 12 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 12 — Evaluasi Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Mengelola tabel menggunakan fungsi yang sudah diajarkan pada pertemuan sebelumnya.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 13 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 13 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Fungsi IF Tunggal.</li>
+                        <li>Fungsi IF Majemuk.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 14 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 14 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Fungsi String.</li>
+                        <li>Fungsi IF Tunggal kombinasi String.</li>
+                        <li>Fungsi IF Majemuk kombinasi String.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 15 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 15 — Evaluasi Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Mengelola tabel menggunakan fungsi yang sudah diajarkan pada pertemuan 13–14.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 16 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 16 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Fungsi HLOOKUP.</li>
+                        <li>Fungsi VLOOKUP.</li>
+                        <li>Sort dan Filter.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 17 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 17 — Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Fungsi HLOOKUP kombinasi String.</li>
+                        <li>Fungsi VLOOKUP kombinasi String.</li>
+                        <li>Mencetak dokumen.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 18 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 18 — Evaluasi Microsoft Excel
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Mengelola tabel menggunakan fungsi yang sudah diajarkan pada pertemuan 16–17.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 19 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 19 — Microsoft PowerPoint
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Membuka dokumen.</li>
+                        <li>Mengelola slide.</li>
+                        <li>Menyimpan dokumen.</li>
+                        <li>Menambahkan objek.</li>
+                        <li>Transisi slide.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 20 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 20 — Microsoft PowerPoint
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Animasi objek.</li>
+                        <li>Export to PDF.</li>
+                        <li>Export to MP4.</li>
+                        <li>Mencetak dokumen.</li>
+                        <li>Membuat presentasi.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 21 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 21 — Latihan Ulangan Praktik
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Latihan ulangan praktik Word.</li>
+                        <li>Latihan ulangan praktik Excel.</li>
+                        <li>Latihan ulangan praktik PowerPoint.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 22 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 22 — Ulangan Praktik
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Ulangan praktik Word — 30 menit.</li>
+                        <li>Ulangan praktik Excel — 30 menit.</li>
+                        <li>Ulangan praktik PowerPoint — 60 menit.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 120 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 23 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 23 — Ulangan Teori
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Ulangan teori Microsoft Office.</li>
+                    </ul>
+
+                    <span class="time-box">⏱ 60 menit</span>
+
+                </div>
+
+            </details>
+
+
+            <!-- 24 -->
+
+            <details class="accordion">
+
+                <summary>
+                    Pertemuan 24 — Review & Evaluasi Akhir
+                </summary>
+
+                <div class="accordion-content">
+
+                    <ul>
+                        <li>Review hasil ulangan teori.</li>
+                        <li>Review hasil ulangan praktik Microsoft Office.</li>
+                        <li>Review materi.</li>
+                    </ul>
+
+                    <span class="time-box">
+                        ⏱ 60 menit + review materi 120 menit
+                    </span>
+
+                </div>
+
+            </details>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="course-cta">
+
+        <div class="course-cta-box">
+
+            <h2>
+                Tertarik Belajar Microsoft Office?
+            </h2>
+
+            <p>
+                Cari tahu lebih lanjut mengenai program
+                bimbingan komputer di Binar Komputer Tegal.
+            </p>
+
+            <a
+                href="index.html#kontak"
+                class="button">
+
+                Hubungi Binar Komputer
+
+            </a>
+
+            <br>
+
+            <a
+                href="index.html"
+                class="course-back">
+
+                ← Kembali ke Beranda
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-logo">
+
+                <img
+                    src="images/logo-binar.jpg"
+                    alt="Binar Komputer">
+
+            </div>
+
+            <h3>
+                Binar Komputer Tegal
+            </h3>
+
+            <p>
+                Belajar komputer lebih mudah,
+                praktis, dan terarah.
+            </p>
+
+            <div class="footer-line"></div>
+
+            <small>
+                © 2026 Binar Komputer. All Rights Reserved.
+            </small>
+
+        </div>
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT PILIH PAKET
+========================= -->
+
+<script>
+
+    function showPackage(packageNumber) {
+
+        /* SEMBUNYIKAN SEMUA DETAIL */
+
+        document.getElementById("detail-10").style.display = "none";
+        document.getElementById("detail-20").style.display = "none";
+        document.getElementById("detail-24").style.display = "none";
+
+
+        /* HAPUS STATUS ACTIVE */
+
+        document.querySelectorAll(".package-card").forEach(function(card) {
+
+            card.classList.remove("active");
+
+        });
+
+
+        /* TAMPILKAN DETAIL YANG DIPILIH */
+
+        const selectedDetail =
+            document.getElementById("detail-" + packageNumber);
+
+        selectedDetail.style.display = "block";
+
+
+        /* AKTIFKAN KARTU */
+
+        const selectedCard =
+            document.querySelector(
+                '.package-card[data-package="' + packageNumber + '"]'
+            );
+
+        selectedCard.classList.add("active");
+
+
+        /* SCROLL KE DETAIL */
+
+        setTimeout(function() {
+
+            selectedDetail.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }, 100);
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

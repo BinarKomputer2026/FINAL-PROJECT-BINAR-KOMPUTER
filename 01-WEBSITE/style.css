@@ -1520,6 +1520,14 @@ footer {
         padding: 20px;
     }
 
+    .contact-card {
+    min-height: 125px;
+}
+
+.contact-info p {
+    line-height: 1.5;
+}
+
     .contact-image {
         width: 65px;
         height: 65px;
@@ -1530,6 +1538,9 @@ footer {
         height: 45px;
     }
 
+    .contact-location-icon {
+    font-size: 32px;
+}
 
     /* FOOTER */
 
@@ -1607,4 +1618,24 @@ footer {
         padding: 35px 20px;
     }
 
+}
+
+.course-link {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    color: #078eb5;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.course-link:hover {
+    color: #14b9e4;
+    transform: translateX(4px);
 }

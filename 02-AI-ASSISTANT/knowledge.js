@@ -7,8 +7,7 @@ const knowledgeBase = [
         keywords: [
             "apa itu binar",
             "tentang binar",
-            "binar komputer",
-            "tentang"
+            "binar komputer"
         ],
         answer: "Binar Komputer adalah tempat kursus yang berfokus pada pelatihan keterampilan di bidang Microsoft Office, Desain Grafis, dan Website."
     },
@@ -21,9 +20,12 @@ const knowledgeBase = [
         keywords: [
             "kursus apa saja",
             "program apa saja",
-            "kursus",
-            "program",
-            "pelatihan"
+            "program kursus",
+            "jenis kursus",
+            "kursus yang tersedia",
+            "pelatihan apa saja",
+            "ada kursus apa",
+            "Info kursus"
         ],
         answer: "Binar Komputer menyediakan program kursus Microsoft Office, Desain Grafis, dan Website."
     },
@@ -46,13 +48,18 @@ const knowledgeBase = [
         answer: "Kursus Microsoft Office di Binar Komputer mempelajari keterampilan perkantoran seperti mengetik cepat, membuat proposal, surat, mail merge, dan penggunaan aplikasi perkantoran."
     },
 
+
+    // =========================
+    // DURASI MICROSOFT OFFICE
+    // =========================
     {
         keywords: [
             "durasi microsoft office",
             "durasi office",
             "berapa pertemuan office",
-            "kursus dasar",
-            "full microsoft office"
+            "kursus dasar microsoft office",
+            "full microsoft office",
+            "berapa lama microsoft office"
         ],
         answer: "Kursus Dasar Microsoft Office memiliki 10–20 pertemuan, sedangkan Kursus Full Microsoft Office memiliki 24 pertemuan. Setiap pertemuan berlangsung selama 90 menit."
     },
@@ -65,6 +72,7 @@ const knowledgeBase = [
         keywords: [
             "desain grafis",
             "kursus desain",
+            "belajar desain",
             "photoshop",
             "corel draw",
             "designer",
@@ -90,7 +98,7 @@ const knowledgeBase = [
             "sql",
             "bootstrap",
             "laravel",
-            "code igniter",
+            "codeigniter",
             "wordpress",
             "android"
         ],
@@ -103,12 +111,12 @@ const knowledgeBase = [
     // =========================
     {
         keywords: [
-            "durasi",
-            "berapa lama",
-            "berapa menit",
+            "berapa lama kursus",
+            "durasi kursus",
             "lama kursus",
             "lama belajar",
-            "pertemuan"
+            "berapa menit pertemuan",
+            "berapa menit belajar"
         ],
         answer: "Setiap pertemuan kursus berlangsung selama 90 menit. Untuk Microsoft Office, Kursus Dasar memiliki 10–20 pertemuan dan Kursus Full memiliki 24 pertemuan."
     },
@@ -123,7 +131,8 @@ const knowledgeBase = [
             "jadwal kelas",
             "kapan belajar",
             "jadwal belajar",
-            "fleksibel"
+            "jadwalnya fleksibel",
+            "jadwal fleksibel"
         ],
         answer: "Jadwal kursus di Binar Komputer bersifat fleksibel dan dapat disesuaikan dengan aktivitas peserta."
     },
@@ -136,11 +145,12 @@ const knowledgeBase = [
         keywords: [
             "semi private",
             "semi privat",
-            "privat",
-            "kelompok",
             "kelas privat",
+            "kelas private",
             "kelas kelompok",
-            "sistem belajar"
+            "sistem belajar",
+            "belajar privat",
+            "belajar kelompok"
         ],
         answer: "Binar Komputer menerapkan sistem belajar semi private. Peserta dapat memilih belajar secara privat atau kelompok dengan harga yang berbeda, serta dapat memulai belajar sesuai permintaan."
     },
@@ -151,13 +161,14 @@ const knowledgeBase = [
     // =========================
     {
         keywords: [
-            "berapa biaya",
-            "berapa harga",
+            "berapa biaya kursus",
+            "berapa harga kursus",
             "biaya kursus",
             "harga kursus",
-            "harga"
+            "biaya belajar",
+            "harga belajar"
         ],
-        answer: "Untuk informasi nominal biaya kursus, silakan hubungi nomor +62 856-0173-0788."
+        answer: "Untuk informasi nominal biaya kursus, silakan hubungi Binar Komputer melalui WhatsApp di +62 856-0173-0788."
     },
 
 
@@ -170,8 +181,9 @@ const knowledgeBase = [
             "bisa cicil",
             "cicilan",
             "bayar cicil",
-            "pembayaran",
-            "bayar lunas"
+            "pembayaran cicilan",
+            "bayar lunas",
+            "pembayaran kursus"
         ],
         answer: "Untuk program kursus dengan durasi kurang dari satu bulan, biaya kursus wajib dibayar lunas. Untuk Paket Privat dengan perkiraan durasi belajar 2–3 bulan, pembayaran dapat dilakukan secara cicilan."
     },
@@ -183,21 +195,25 @@ const knowledgeBase = [
     {
         keywords: [
             "fasilitas",
-            "fasilitas kursus",
             "fasilitas belajar",
             "dapat apa",
             "mendapat apa",
-            "benefit"
+            "fasilitas yang didapat",
+            "benefit kursus"
         ],
         answer: "Fasilitas belajar di Binar Komputer meliputi tempat belajar, meja dan kursi, PC atau komputer, WiFi, minuman, modul gratis, sertifikat gratis, serta konsultasi materi gratis."
     },
 
+
+    // =========================
+    // SERTIFIKAT DAN MODUL
+    // =========================
     {
         keywords: [
             "sertifikat",
             "modul",
-            "wifi",
-            "komputer",
+            "wifi gratis",
+            "komputer gratis",
             "konsultasi materi"
         ],
         answer: "Setelah melunasi biaya kursus, peserta mendapatkan modul gratis, sertifikat gratis, WiFi gratis, fasilitas komputer untuk belajar, serta konsultasi materi gratis."
@@ -211,12 +227,45 @@ const knowledgeBase = [
         keywords: [
             "cara daftar",
             "cara mendaftar",
-            "mendaftar",
-            "pendaftaran",
+            "ingin daftar",
+            "ingin mendaftar",
+            "mau daftar",
+            "mau mendaftar",
             "daftar kursus",
-            "ingin daftar"
+            "daftar online",
+            "pendaftaran online",
+            "formulir pendaftaran",
+            "formulir daftar"
         ],
-        answer: "Untuk mendaftar kursus di Binar Komputer, silakan mengisi formulir pendaftaran melalui Google Form."
+        answer: "Untuk mendaftar kursus di Binar Komputer, silakan mengisi formulir pendaftaran melalui Google Form berikut:\n\nhttps://forms.gle/65VmKs6fR9p9pYqF8"
+    },
+
+
+    // =========================
+    // LOKASI
+    // =========================
+    {
+        keywords: [
+            "lokasi",
+            "alamat",
+            "alamat binar",
+            "lokasi binar",
+            "dimana binar",
+            "di mana binar",
+            "tempat binar",
+            "tempat kursus",
+            "tempat kursus binar",
+            "lokasi kursus",
+            "alamat kursus",
+            "kursus di mana",
+            "kursus dimana",
+            "binar di mana",
+            "binar dimana",
+            "binar di tegal",
+            "di tegal",
+            "tegal"
+        ],
+        answer: "📍 Binar Komputer beralamat di:\n\nJl. Badak IV No.6, Sibata, Mejasem Bar., Kec. Kramat, Kabupaten Tegal, Jawa Tengah 52181, Indonesia."
     },
 
 
@@ -225,14 +274,15 @@ const knowledgeBase = [
     // =========================
     {
         keywords: [
-            "syarat",
-            "persyaratan",
             "syarat daftar",
-            "butuh apa",
-            "apa yang dibutuhkan",
-            "ktp",
-            "pas foto",
-            "foto 3x4"
+            "persyaratan daftar",
+            "syarat pendaftaran",
+            "persyaratan pendaftaran",
+            "butuh apa untuk daftar",
+            "apa yang dibutuhkan untuk daftar",
+            "ktp untuk daftar",
+            "pas foto untuk daftar",
+            "foto 3x4 untuk daftar"
         ],
         answer: "Persyaratan pendaftaran kursus di Binar Komputer adalah fotokopi KTP, pas foto ukuran 3×4 sebanyak 2 lembar, mengisi formulir pendaftaran, dan membayar biaya kursus yang diikuti."
     },
@@ -245,13 +295,14 @@ const knowledgeBase = [
         keywords: [
             "jam operasional",
             "jam buka",
-            "buka jam",
-            "jam berapa buka",
             "jam tutup",
-            "tutup jam",
-            "buka hari apa",
+            "jam berapa buka",
+            "jam berapa tutup",
+            "kapan buka",
+            "kapan tutup",
             "hari apa buka",
-            "hari operasional"
+            "hari operasional",
+            "pukul berapa"
         ],
         answer: "Binar Komputer beroperasional pada hari Senin sampai Jumat, pukul 09.00–20.00."
     },
@@ -262,11 +313,11 @@ const knowledgeBase = [
     // =========================
     {
         keywords: [
-            "whatsapp",
-            "wa",
+            "whatsapp binar",
+            "wa binar",
             "nomor whatsapp",
-            "kontak",
             "nomor admin",
+            "kontak binar",
             "hubungi admin"
         ],
         answer: "Anda dapat menghubungi Binar Komputer melalui WhatsApp di +62 856-0173-0788 atau email binar.komputer@gmail.com."
@@ -278,8 +329,9 @@ const knowledgeBase = [
     // =========================
     {
         keywords: [
-            "email",
-            "alamat email"
+            "email binar",
+            "alamat email",
+            "email"
         ],
         answer: "Email Binar Komputer adalah binar.komputer@gmail.com."
     },
@@ -290,9 +342,10 @@ const knowledgeBase = [
     // =========================
     {
         keywords: [
+            "instagram binar",
+            "ig binar",
             "instagram",
-            "ig",
-            "media sosial"
+            "media sosial binar"
         ],
         answer: "Instagram Binar Komputer adalah @binarkomputer."
     },
@@ -306,7 +359,7 @@ const knowledgeBase = [
             "website binar",
             "web binar",
             "situs binar",
-            "website resmi"
+            "website resmi binar"
         ],
         answer: "Website resmi Binar Komputer dapat diakses melalui https://binarkomputer.com."
     }

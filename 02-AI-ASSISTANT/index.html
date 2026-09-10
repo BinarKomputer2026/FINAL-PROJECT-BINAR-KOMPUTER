@@ -1,71 +1,118 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>BINAR AI Assistant</title>
+    <title>Binar AI Assistant</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    
+
     <div class="chat-container">
 
-        <!-- Header -->
+        <!-- =========================
+             HEADER
+             ========================= -->
         <div class="chat-header">
 
-    <!-- Bagian kiri: Profile + Nama -->
-    <div class="header-left">
+            <!-- Bagian kiri -->
+            <div class="header-left">
 
-        <div class="profile-icon">
-            👤
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <div class="header-title">
+                    <h2>Binar Komputer Assistant</h2>
+                    <p>Siap membantu Anda!</p>
+                </div>
+
+            </div>
+
+
+            <!-- Bagian kanan -->
+            <div class="header-right">
+
+                <div class="online-status">
+                    <span class="online-dot"></span>
+                    Online
+                </div>
+
+                <!-- Tombol Dark Mode -->
+                <button
+                    id="darkModeButton"
+                    class="header-button"
+                    title="Dark Mode">
+                    🌙
+                </button>
+
+                <!-- Tombol Clear Chat -->
+                <button
+                    id="clearChatButton"
+                    class="header-button"
+                    title="Bersihkan Chat">
+                    🗑️
+                </button>
+
+            </div>
+
         </div>
 
-        <div class="header-title">
-            <h2>Binar Komputer Assistant</h2>
-            <p>Siap membantu Anda!</p>
+
+        <!-- =========================
+             AREA PERCAKAPAN
+             ========================= -->
+        <div class="chat-box">
+
+            <!-- Pesan pertama dari AI -->
+            <div class="message ai-message">
+
+                Halo! 👋 Selamat datang di Binar Assistant.
+                Ada yang bisa saya bantu?
+
+            </div>
+
+
+            <!-- Quick Reply -->
+            <div class="quick-replies">
+
+                <button>📚 Info Kursus</button>
+
+                <button>📅 Jadwal Kelas</button>
+
+                <button>📍 Lokasi</button>
+
+            </div>
+
         </div>
 
-    </div>
 
-
-    <!-- Bagian kanan: Status -->
-    <div class="online-status">
-        <span class="online-dot"></span>
-        Online
-    </div>
-
-</div>
-
-
-        <!-- Area Percakapan -->
-         <div class="chat-box">
-
-    <!-- Pesan pertama dari AI -->
-    <div class="message ai-message">
-        Halo! 👋 Selamat datang di Binar Assistant.
-        Ada yang bisa saya bantu?
-    </div>
-
-
-    <!-- Quick Reply di bawah sapaan AI -->
-    <div class="quick-replies">
-        <button>📚 Info Kursus</button>
-        <button>📅 Jadwal Kelas</button>
-        <button>💻 Program / Promo</button>
-    </div>
-
-</div>
-        <!-- Input Pesan -->
+        <!-- =========================
+             INPUT PESAN
+             ========================= -->
         <div class="chat-input">
-            <input type="text" placeholder="Ketik pertanyaan Anda...">
-            <button>Kirim ➤</button>
+
+            <input
+                type="text"
+                placeholder="Ketik pertanyaan Anda...">
+
+            <button>
+                Kirim ➤
+            </button>
+
         </div>
 
     </div>
+
+
+    <!-- JavaScript -->
     <script src="knowledge.js"></script>
     <script src="script.js"></script>
+
 </body>
+
 </html>

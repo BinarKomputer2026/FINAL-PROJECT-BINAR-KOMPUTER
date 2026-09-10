@@ -4,10 +4,17 @@
     box-sizing: border-box;
 }
 
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    transition: background-color 0.3s;
 }
+
+
+/* =========================
+   CHAT CONTAINER
+   ========================= */
 
 .chat-container {
     width: 400px;
@@ -16,10 +23,14 @@ body {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s;
 }
 
 
-/* HEADER */
+/* =========================
+   HEADER
+   ========================= */
+
 .chat-header {
     background-color: #2196f3;
     color: white;
@@ -29,11 +40,15 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
+
 .header-left {
     display: flex;
     align-items: center;
     gap: 12px;
 }
+
+
 .profile-icon {
     width: 45px;
     height: 45px;
@@ -49,45 +64,106 @@ body {
 
     font-size: 22px;
 }
+
+
 .header-title h2 {
     font-size: 22px;
     margin: 0;
 }
 
+
 .header-title p {
     font-size: 13px;
     margin-top: 4px;
 }
+
+
+/* =========================
+   HEADER KANAN
+   ========================= */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
 .online-status {
     display: flex;
     align-items: center;
     gap: 6px;
-
     font-size: 14px;
 }
 
-/* AREA CHAT */
+
+.online-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #4caf50;
+    border-radius: 50%;
+}
+
+
+/* =========================
+   TOMBOL HEADER
+   ========================= */
+
+.header-button {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    transition: 0.2s;
+}
+
+
+.header-button:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   AREA CHAT
+   ========================= */
 
 .chat-box {
     padding: 20px;
     height: 300px;
     overflow-y: auto;
+
+    transition: background-color 0.3s;
 }
 
 
-/* PESAN */
+/* =========================
+   PESAN
+   ========================= */
 
 .message {
     padding: 12px 15px;
     margin-bottom: 15px;
+
     border-radius: 15px;
     max-width: 75%;
 }
+
 
 .ai-message {
     background-color: #eeeeee;
     margin-right: auto;
 }
+
 
 .user-message {
     background-color: #2196f3;
@@ -96,49 +172,327 @@ body {
 }
 
 
-/* QUICK REPLY */
+/* =========================
+   TIMESTAMP
+   ========================= */
 
-.quick-replies {
-    padding: 10px;
+.message-time {
+    font-size: 10px;
+    opacity: 0.55;
+    margin-top: 4px;
+}
+
+
+/* =========================
+   TOMBOL AKSI
+   ========================= */
+
+.message-actions {
     display: flex;
-    gap: 5px;
+    gap: 7px;
+    margin-top: 8px;
     flex-wrap: wrap;
 }
 
+
+.copy-button,
+.admin-button {
+    border: none;
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.copy-button {
+    background-color: #eaf4ff;
+    color: #1976d2;
+}
+
+
+.copy-button:hover {
+    background-color: #d8ebff;
+}
+
+
+.admin-button {
+    background-color: #1976d2;
+    color: white;
+}
+
+
+.admin-button:hover {
+    background-color: #125ca8;
+}
+
+
+/* =========================
+   SARAN PERTANYAAN
+   ========================= */
+
+.suggestions {
+    margin-top: 10px;
+}
+
+
+.suggestions-title {
+    font-size: 12px;
+    margin-bottom: 6px;
+    opacity: 0.75;
+}
+
+
+.suggestion-button {
+    display: block;
+    width: 100%;
+
+    text-align: left;
+
+    border: 1px solid #dcecff;
+
+    background-color: #f7fbff;
+    color: #1976d2;
+
+    padding: 7px 10px;
+    margin-top: 5px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.suggestion-button:hover {
+    background-color: #eaf4ff;
+    border-color: #1976d2;
+}
+
+
+/* =========================
+   QUICK REPLY
+   ========================= */
+
+.quick-replies {
+    padding: 10px;
+
+    display: flex;
+    gap: 5px;
+
+    flex-wrap: wrap;
+}
+
+
 .quick-replies button {
     padding: 8px 10px;
+
     border: none;
     border-radius: 15px;
+
     cursor: pointer;
+
+    transition: 0.2s;
 }
 
 
-/* INPUT */
-
-.chat-input {
-    display: flex;
-    padding: 15px;
-    border-top: 1px solid #ddd;
-}
-
-.chat-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-}
-
-.chat-input button {
-    margin-left: 8px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 20px;
-    background-color: #2196f3;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-} 
 .quick-replies button:hover {
     background-color: #dcdcdc;
     transform: scale(1.05);
+}
+
+
+/* =========================
+   INPUT
+   ========================= */
+
+.chat-input {
+    display: flex;
+
+    padding: 15px;
+
+    border-top: 1px solid #ddd;
+}
+
+
+.chat-input input {
+    flex: 1;
+
+    padding: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 20px;
+
+    outline: none;
+}
+
+
+.chat-input input:focus {
+    border-color: #2196f3;
+}
+
+
+.chat-input button {
+    margin-left: 8px;
+
+    padding: 10px 15px;
+
+    border: none;
+    border-radius: 20px;
+
+    background-color: #2196f3;
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.chat-input button:hover {
+    background-color: #1976d2;
+}
+
+
+/* =========================
+   TYPING INDICATOR
+   ========================= */
+
+.typing-bubble {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+
+.typing-text {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+
+.typing-dots {
+    display: flex;
+    margin-left: 2px;
+}
+
+
+.typing-dots span {
+    font-size: 16px;
+    animation: typing 1.2s infinite;
+}
+
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+
+@keyframes typing {
+
+    0% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.2;
+    }
+
+}
+
+
+/* =========================
+   DARK MODE
+   ========================= */
+
+body.dark-mode {
+    background-color: #121212;
+}
+
+
+body.dark-mode .chat-container {
+    background-color: #1e1e1e;
+}
+
+
+body.dark-mode .chat-box {
+    background-color: #1e1e1e;
+}
+
+
+body.dark-mode .ai-message {
+    background-color: #333333;
+    color: #f5f5f5;
+}
+
+
+body.dark-mode .chat-input {
+    background-color: #1e1e1e;
+    border-top-color: #444;
+}
+
+
+body.dark-mode .chat-input input {
+    background-color: #2a2a2a;
+    color: white;
+    border-color: #555;
+}
+
+
+body.dark-mode .chat-input input::placeholder {
+    color: #aaa;
+}
+
+
+body.dark-mode .quick-replies button {
+    background-color: #333333;
+    color: white;
+}
+
+
+body.dark-mode .quick-replies button:hover {
+    background-color: #444444;
+}
+
+
+body.dark-mode .suggestion-button {
+    background-color: #292929;
+    color: #8ec5ff;
+    border-color: #444444;
+}
+
+
+body.dark-mode .suggestion-button:hover {
+    background-color: #333333;
+}
+
+
+body.dark-mode .copy-button {
+    background-color: #293b4d;
+    color: #8ec5ff;
+}
+
+
+body.dark-mode .message-time {
+    color: #ddd;
+}
+
+
+body.dark-mode .suggestions-title {
+    color: #ddd;
 }

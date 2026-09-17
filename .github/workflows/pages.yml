@@ -30,6 +30,8 @@ jobs:
         run: |
           mkdir -p _site
           cp -r 01-WEBSITE/* _site/
+          mkdir -p _site/ai-assistant
+          cp -r 02-AI-ASSISTANT/* _site/ai-assistant/
 
       - name: Upload website
         uses: actions/upload-pages-artifact@v3

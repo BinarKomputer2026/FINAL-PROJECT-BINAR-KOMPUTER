@@ -8,8 +8,8 @@ const sendButton = document.querySelector(".chat-input button");
 // SUARA
 // =========================
 
-const sendSound = new Audio("sound/send.mp3");
-const receiveSound = new Audio("sound/recieve.mp3");
+const sendSound = new Audio("sounds/send.mp3");
+const receiveSound = new Audio("sounds/recieve.mp3");
 
 
 

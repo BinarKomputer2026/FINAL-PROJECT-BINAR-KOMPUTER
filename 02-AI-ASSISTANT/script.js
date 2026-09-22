@@ -3,23 +3,26 @@ const input = document.querySelector(".chat-input input");
 const sendButton = document.querySelector(".chat-input button");
 
 
+
 // =========================
 // SUARA
 // =========================
 
-const sendSound = new Audio("sounds/send.mp3");
-const receiveSound = new Audio("sounds/recieve.mp3");
+const sendSound = new Audio("sound/send.mp3");
+const receiveSound = new Audio("sound/recieve.mp3");
+
 
 
 // =========================
 // KONFIGURASI
 // =========================
 
-// Nilai minimum agar sebuah topik dianggap cocok
 const MINIMUM_SCORE = 2;
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxOOBC5UeK2redwAw3dMahG-FR4NodxJLMoDQT0p3yOQvvQ969gsLhRtrnifrvGOdGQ/exec";
 
 // Menyimpan topik percakapan terakhir
 let lastDetectedTopic = "";
+
 
 
 // =========================
@@ -29,6 +32,7 @@ let lastDetectedTopic = "";
 function scrollToBottom() {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+
 
 
 // =========================
@@ -46,8 +50,9 @@ function normalizeText(text) {
 }
 
 
+
 // =========================
-// MENGHITUNG KEMIRIPAN KATA
+// MENGECEK KATA
 // =========================
 
 function containsAny(text, words) {
@@ -62,6 +67,7 @@ function containsAny(text, words) {
 
     return false;
 }
+
 
 
 // =========================
@@ -87,7 +93,6 @@ const topicAliases = {
         "perkantoran"
     ],
 
-
     design: [
         "desain",
         "design",
@@ -105,7 +110,6 @@ const topicAliases = {
         "edit gambar",
         "percetakan"
     ],
-
 
     website: [
         "website",
@@ -134,7 +138,6 @@ const topicAliases = {
         "aplikasi android"
     ],
 
-
     price: [
         "biaya",
         "harga",
@@ -149,7 +152,6 @@ const topicAliases = {
         "murah"
     ],
 
-
     schedule: [
         "jadwal",
         "kapan belajar",
@@ -162,7 +164,6 @@ const topicAliases = {
         "jadwalnya"
     ],
 
-
     duration: [
         "berapa lama",
         "durasi",
@@ -174,7 +175,6 @@ const topicAliases = {
         "90 menit",
         "jumlah pertemuan"
     ],
-
 
     registration: [
         "daftar",
@@ -189,7 +189,6 @@ const topicAliases = {
         "menjadi peserta"
     ],
 
-
     requirement: [
         "syarat",
         "persyaratan",
@@ -201,7 +200,6 @@ const topicAliases = {
         "dibutuhkan untuk daftar",
         "yang harus dibawa"
     ],
-
 
     facility: [
         "fasilitas",
@@ -217,7 +215,6 @@ const topicAliases = {
         "komputer"
     ],
 
-
     payment: [
         "cicilan",
         "dicicil",
@@ -227,7 +224,6 @@ const topicAliases = {
         "pelunasan",
         "pembayaran kursus"
     ],
-
 
     location: [
         "lokasi",
@@ -243,7 +239,6 @@ const topicAliases = {
         "tegal"
     ],
 
-
     contact: [
         "kontak",
         "hubungi",
@@ -257,14 +252,12 @@ const topicAliases = {
         "alamat email"
     ],
 
-
     instagram: [
         "instagram",
         "ig",
         "media sosial",
         "sosial media"
     ],
-
 
     general: [
         "apa itu binar",
@@ -273,6 +266,125 @@ const topicAliases = {
     ]
 
 };
+
+
+
+// =========================
+// ALIAS INTENT
+// =========================
+
+const intentAliases = {
+
+    price: [
+        "biaya",
+        "harga",
+        "tarif",
+        "berapa harga",
+        "berapa biaya",
+        "harganya berapa",
+        "biayanya berapa",
+        "bayar berapa",
+        "mahal",
+        "murah"
+    ],
+
+    duration: [
+        "berapa lama",
+        "durasi",
+        "lama",
+        "berapa pertemuan",
+        "berapa kali",
+        "berapa menit",
+        "berapa jam"
+    ],
+
+    schedule: [
+        "jadwal",
+        "kapan",
+        "hari apa",
+        "jam berapa",
+        "waktu belajar",
+        "waktu kelas"
+    ],
+
+    registration: [
+        "daftar",
+        "mendaftar",
+        "pendaftaran",
+        "registrasi",
+        "register",
+        "cara ikut",
+        "cara masuk kursus"
+    ],
+
+    requirement: [
+        "syarat",
+        "persyaratan",
+        "dokumen",
+        "ktp",
+        "pas foto",
+        "foto",
+        "berkas",
+        "yang harus dibawa"
+    ],
+
+    facility: [
+        "fasilitas",
+        "dapat apa",
+        "mendapat apa",
+        "benefit",
+        "disediakan",
+        "apa saja yang didapat"
+    ],
+
+    payment: [
+        "cicilan",
+        "dicicil",
+        "angsuran",
+        "bayar lunas",
+        "pelunasan"
+    ],
+
+    location: [
+        "lokasi",
+        "alamat",
+        "di mana",
+        "dimana",
+        "tempatnya",
+        "tempat kursus"
+    ],
+
+    contact: [
+        "kontak",
+        "hubungi",
+        "nomor",
+        "nomor wa",
+        "whatsapp",
+        "wa",
+        "email",
+        "admin"
+    ],
+
+    instagram: [
+        "instagram",
+        "ig",
+        "media sosial",
+        "sosial media"
+    ],
+
+    courseInfo: [
+        "apa saja",
+        "materi",
+        "belajar apa",
+        "mempelajari apa",
+        "isi kursus",
+        "kursus apa",
+        "program apa",
+        "ada kursus"
+    ]
+
+};
+
 
 
 // =========================
@@ -285,10 +397,15 @@ function detectTopics(text) {
 
     for (const topic in topicAliases) {
 
-        const aliases = topicAliases[topic];
+        if (
+            containsAny(
+                text,
+                topicAliases[topic]
+            )
+        ) {
 
-        if (containsAny(text, aliases)) {
             detectedTopics.push(topic);
+
         }
 
     }
@@ -297,78 +414,53 @@ function detectTopics(text) {
 }
 
 
+
 // =========================
-// MENENTUKAN INTENT UTAMA
+// MENENTUKAN INTENT
 // =========================
 
 function detectPrimaryIntent(text) {
 
-    // Prioritas pertanyaan biaya
-    if (containsAny(text, topicAliases.price)) {
-        return "price";
+    const intentPriority = [
+        "payment",
+        "price",
+        "requirement",
+        "registration",
+        "location",
+        "schedule",
+        "duration",
+        "facility",
+        "contact",
+        "instagram",
+        "courseInfo"
+    ];
+
+
+
+    for (let i = 0; i < intentPriority.length; i++) {
+
+        const intent = intentPriority[i];
+
+        if (
+            containsAny(
+                text,
+                intentAliases[intent]
+            )
+        ) {
+
+            return intent;
+
+        }
+
     }
-
-
-    // Prioritas pertanyaan cicilan/pembayaran
-    if (containsAny(text, topicAliases.payment)) {
-        return "payment";
-    }
-
-
-    // Prioritas pertanyaan syarat
-    if (containsAny(text, topicAliases.requirement)) {
-        return "requirement";
-    }
-
-
-    // Prioritas pendaftaran
-    if (containsAny(text, topicAliases.registration)) {
-        return "registration";
-    }
-
-
-    // Prioritas lokasi
-    if (containsAny(text, topicAliases.location)) {
-        return "location";
-    }
-
-
-    // Prioritas jadwal
-    if (containsAny(text, topicAliases.schedule)) {
-        return "schedule";
-    }
-
-
-    // Prioritas durasi
-    if (containsAny(text, topicAliases.duration)) {
-        return "duration";
-    }
-
-
-    // Prioritas fasilitas
-    if (containsAny(text, topicAliases.facility)) {
-        return "facility";
-    }
-
-
-    // Kontak
-    if (containsAny(text, topicAliases.contact)) {
-        return "contact";
-    }
-
-
-    // Instagram
-    if (containsAny(text, topicAliases.instagram)) {
-        return "instagram";
-    }
-
 
     return null;
 }
 
 
+
 // =========================
-// MENCARI ITEM KNOWLEDGE BASE
+// MENCARI KNOWLEDGE BERDASARKAN TOPIK
 // =========================
 
 function findKnowledgeItemByTopic(topic) {
@@ -476,9 +568,11 @@ function findKnowledgeItemByTopic(topic) {
     };
 
 
+
     if (!topicMap[topic]) {
         return null;
     }
+
 
 
     for (let i = 0; i < knowledgeBase.length; i++) {
@@ -492,7 +586,9 @@ function findKnowledgeItemByTopic(topic) {
                     topicMap[topic][j]
                 )
             ) {
+
                 return item;
+
             }
 
         }
@@ -500,19 +596,21 @@ function findKnowledgeItemByTopic(topic) {
     }
 
 
+
     return null;
 }
 
 
+
 // =========================
-// MENCARI KNOWLEDGE BASE
-// DENGAN SISTEM SCORING
+// MENCARI KNOWLEDGE DENGAN SCORING
 // =========================
 
-function searchKnowledgeBase(text) {
+function searchKnowledgeBase(text, preferredTopic = null) {
 
     let bestItem = null;
     let highestScore = 0;
+
 
 
     for (let i = 0; i < knowledgeBase.length; i++) {
@@ -522,29 +620,53 @@ function searchKnowledgeBase(text) {
         let score = 0;
 
 
+
         for (let j = 0; j < item.keywords.length; j++) {
 
-            const keyword = normalizeText(
-                item.keywords[j]
-            );
+            const keyword =
+                normalizeText(item.keywords[j]);
 
 
-            // Keyword panjang mendapat skor lebih tinggi
+
             if (text.includes(keyword)) {
 
-                if (keyword.length >= 12) {
+                if (keyword.length >= 15) {
+
+                    score += 7;
+
+                } else if (keyword.length >= 10) {
+
                     score += 5;
-                } else if (keyword.length >= 8) {
-                    score += 4;
-                } else if (keyword.length >= 5) {
+
+                } else if (keyword.length >= 6) {
+
                     score += 3;
+
                 } else {
+
                     score += 2;
+
                 }
 
             }
 
         }
+
+
+
+        // Bonus apabila item sesuai dengan topik terakhir
+        if (
+            preferredTopic &&
+            knowledgeItemMatchesTopic(
+                item,
+                preferredTopic
+            )
+        ) {
+
+            score += 2;
+
+        }
+
 
 
         if (score > highestScore) {
@@ -557,11 +679,59 @@ function searchKnowledgeBase(text) {
     }
 
 
+
     return {
         item: bestItem,
         score: highestScore
     };
 }
+
+
+
+// =========================
+// CEK ITEM SESUAI TOPIK
+// =========================
+
+function knowledgeItemMatchesTopic(item, topic) {
+
+    if (!topicAliases[topic]) {
+        return false;
+    }
+
+
+
+    for (let i = 0; i < topicAliases[topic].length; i++) {
+
+        const alias =
+            topicAliases[topic][i];
+
+
+
+        if (
+            item.keywords.some(
+                keyword =>
+                    normalizeText(keyword)
+                        .includes(
+                            normalizeText(alias)
+                        ) ||
+                    normalizeText(alias)
+                        .includes(
+                            normalizeText(keyword)
+                        )
+            )
+        ) {
+
+            return true;
+
+        }
+
+    }
+
+
+
+    return false;
+}
+
 
 
 // =========================
@@ -587,21 +757,76 @@ function isGreeting(text) {
     ];
 
 
+
     for (let i = 0; i < greetings.length; i++) {
 
         if (
             text === greetings[i] ||
-            text.startsWith(greetings[i] + " ")
+            text.startsWith(
+                greetings[i] + " "
+            )
         ) {
+
             return true;
+
         }
 
     }
 
 
+
     return false;
 }
 
+
+
+// =========================
+// MENENTUKAN TOPIK KURSUS
+// =========================
+
+function detectCourseTopic(text) {
+
+    if (
+        containsAny(
+            text,
+            topicAliases.office
+        )
+    ) {
+
+        return "office";
+
+    }
+
+
+
+    if (
+        containsAny(
+            text,
+            topicAliases.design
+        )
+    ) {
+
+        return "design";
+
+    }
+
+
+
+    if (
+        containsAny(
+            text,
+            topicAliases.website
+        )
+    ) {
+
+        return "website";
+
+    }
+
+
+
+    return null;
+}
 
 // =========================
 // MEMBUAT JAWABAN LEBIH NATURAL
@@ -609,28 +834,171 @@ function isGreeting(text) {
 
 function makeNaturalResponse(answer, topic, text) {
 
-    let response = answer;
+    // =========================
+    // PENDAFTARAN
+    // =========================
+    if (topic === "registration") {
 
-
-    // Untuk pertanyaan biaya yang sekaligus
-    // menyebut program tertentu
-    if (
-        topic === "price" &&
-        (
-            containsAny(text, topicAliases.office) ||
-            containsAny(text, topicAliases.design) ||
-            containsAny(text, topicAliases.website)
-        )
-    ) {
-
-        response =
-            "Untuk nominal biaya kursus tersebut, " +
-            "informasinya dapat diperoleh melalui WhatsApp Binar Komputer di +62 856-0173-0788.";
+        return (
+            "Bisa 😊 Kalau kamu mau mendaftar kursus di Binar Komputer, " +
+            "kamu bisa mengisi formulir pendaftaran online berikut:\n\n" +
+            "https://forms.gle/65VmKs6fR9p9pYqF8"
+        );
 
     }
 
 
-    return response;
+
+    // =========================
+    // SYARAT PENDAFTARAN
+    // =========================
+    if (topic === "requirement") {
+
+        return (
+            "Untuk pendaftarannya, ada beberapa persyaratan yang perlu disiapkan, " +
+            "yaitu fotokopi KTP, 2 lembar pas foto ukuran 3×4, mengisi formulir pendaftaran, " +
+            "dan membayar biaya kursus yang diikuti."
+        );
+
+    }
+
+
+
+    // =========================
+    // BIAYA
+    // =========================
+    if (topic === "price") {
+
+        // Jika user menyebut program tertentu
+        if (
+            containsAny(text, topicAliases.office) ||
+            containsAny(text, topicAliases.design) ||
+            containsAny(text, topicAliases.website)
+        ) {
+
+            return (
+                "Untuk nominal biaya kursusnya, kamu bisa langsung menghubungi " +
+                "Binar Komputer melalui WhatsApp di +62 856-0173-0788 ya 😊"
+            );
+
+        }
+
+        return (
+            "Untuk mengetahui nominal biaya kursus, kamu bisa langsung menghubungi " +
+            "Binar Komputer melalui WhatsApp di +62 856-0173-0788 ya 😊"
+        );
+
+    }
+
+
+
+    // =========================
+    // LOKASI
+    // =========================
+    if (topic === "location") {
+
+        return (
+            "Binar Komputer berada di:\n\n" +
+            "📍 Jl. Badak IV No.6, Sibata, Mejasem Bar., " +
+            "Kec. Kramat, Kabupaten Tegal, Jawa Tengah 52181, Indonesia."
+        );
+
+    }
+
+
+
+    // =========================
+    // JADWAL
+    // =========================
+    if (topic === "schedule") {
+
+        return (
+            "Untuk jadwal belajar, Binar Komputer menerapkan jadwal yang fleksibel " +
+            "dan dapat disesuaikan dengan aktivitas peserta."
+        );
+
+    }
+
+
+
+    // =========================
+    // DURASI
+    // =========================
+    if (topic === "duration") {
+
+        return (
+            "Untuk durasinya, setiap pertemuan berlangsung selama 90 menit. " +
+            "Khusus Microsoft Office Dasar ada 10–20 pertemuan, sedangkan " +
+            "Full Microsoft Office berlangsung selama 24 pertemuan."
+        );
+
+    }
+
+
+
+    // =========================
+    // FASILITAS
+    // =========================
+    if (topic === "facility") {
+
+        return (
+            "Selama mengikuti kursus, kamu mendapatkan fasilitas seperti tempat belajar, " +
+            "meja dan kursi, PC atau komputer, WiFi, minuman, modul, sertifikat, " +
+            "serta konsultasi materi."
+        );
+
+    }
+
+
+
+    // =========================
+    // PEMBAYARAN
+    // =========================
+    if (topic === "payment") {
+
+        return (
+            "Untuk pembayaran, kursus dengan durasi kurang dari satu bulan " +
+            "wajib dibayar lunas. Sementara itu, Paket Privat dengan perkiraan " +
+            "durasi belajar 2–3 bulan dapat dibayar secara cicilan."
+        );
+
+    }
+
+
+
+    // =========================
+    // KONTAK
+    // =========================
+    if (topic === "contact") {
+
+        return (
+            "Kalau kamu ingin menghubungi Binar Komputer, bisa melalui WhatsApp " +
+            "di +62 856-0173-0788 atau melalui email binar.komputer@gmail.com."
+        );
+
+    }
+
+
+
+    // =========================
+    // INSTAGRAM
+    // =========================
+    if (topic === "instagram") {
+
+        return (
+            "Kamu bisa menemukan Binar Komputer di Instagram @binarkomputer."
+        );
+
+    }
+
+
+
+    // =========================
+    // DEFAULT
+    // =========================
+
+    return answer;
+
 }
 
 
@@ -640,7 +1008,9 @@ function makeNaturalResponse(answer, topic, text) {
 
 function getAIResponse(userMessage) {
 
-    const text = normalizeText(userMessage);
+    const text =
+        normalizeText(userMessage);
+
 
 
     // =========================
@@ -651,16 +1021,14 @@ function getAIResponse(userMessage) {
 
         lastDetectedTopic = "";
 
-        return "Halo! 👋 Selamat datang di Binar Komputer Assistant. Ada yang bisa saya bantu mengenai program kursus, jadwal, pendaftaran, atau informasi lainnya?";
+        return (
+            "Halo! 👋 Selamat datang di Binar Komputer Assistant. " +
+            "Ada yang bisa saya bantu mengenai program kursus, " +
+            "jadwal, pendaftaran, atau informasi lainnya?"
+        );
+
     }
 
-
-    // =========================
-    // DETEKSI INTENT UTAMA
-    // =========================
-
-    const primaryIntent =
-        detectPrimaryIntent(text);
 
 
     // =========================
@@ -671,6 +1039,100 @@ function getAIResponse(userMessage) {
         detectTopics(text);
 
 
+
+    const courseTopic =
+        detectCourseTopic(text);
+
+
+
+    // =========================
+    // DETEKSI INTENT
+    // =========================
+
+    const primaryIntent =
+        detectPrimaryIntent(text);
+
+
+
+    // =========================
+    // JIKA ADA INTENT + TOPIK KURSUS
+    // =========================
+
+    if (
+        primaryIntent &&
+        courseTopic
+    ) {
+
+        // Simpan topik kursus
+        lastDetectedTopic =
+            courseTopic;
+
+
+
+        // Durasi
+        if (
+            primaryIntent === "duration"
+        ) {
+
+            const result =
+                searchKnowledgeBase(
+                    text,
+                    courseTopic
+                );
+
+
+
+            if (
+                result.item &&
+                result.score >= MINIMUM_SCORE
+            ) {
+
+                return makeNaturalResponse(
+                    result.item.answer,
+                    "duration",
+                    text
+                );
+
+            }
+
+
+
+            // Kalau informasi durasi spesifik belum ada
+            if (
+                courseTopic === "office"
+            ) {
+
+                return (
+                    "Untuk Microsoft Office, " +
+                    "Kursus Dasar memiliki 10–20 pertemuan, " +
+                    "sedangkan Full Microsoft Office memiliki " +
+                    "24 pertemuan. Setiap pertemuan berlangsung " +
+                    "selama 90 menit."
+                );
+
+            }
+
+        }
+
+
+
+        // Biaya
+        if (
+            primaryIntent === "price"
+        ) {
+
+            return makeNaturalResponse(
+                "",
+                "price",
+                text
+            );
+
+        }
+
+    }
+
+
+
     // =========================
     // JIKA ADA INTENT SPESIFIK
     // =========================
@@ -678,12 +1140,19 @@ function getAIResponse(userMessage) {
     if (primaryIntent) {
 
         const specificItem =
-            findKnowledgeItemByTopic(primaryIntent);
+            findKnowledgeItemByTopic(
+                primaryIntent
+            );
+
 
 
         if (specificItem) {
 
-            lastDetectedTopic = primaryIntent;
+            lastDetectedTopic =
+                courseTopic ||
+                primaryIntent;
+
+
 
             return makeNaturalResponse(
                 specificItem.answer,
@@ -696,30 +1165,35 @@ function getAIResponse(userMessage) {
     }
 
 
+
     // =========================
     // JIKA HANYA MENYEBUT TOPIK
     // =========================
 
-    if (detectedTopics.length > 0) {
+    if (
+        detectedTopics.length > 0
+    ) {
 
-        // Jika hanya satu topik terdeteksi
-        if (detectedTopics.length === 1) {
-
-            const topic =
-                detectedTopics[0];
-
+        // Jika ada topik kursus
+        if (courseTopic) {
 
             const topicItem =
-                findKnowledgeItemByTopic(topic);
+                findKnowledgeItemByTopic(
+                    courseTopic
+                );
+
 
 
             if (topicItem) {
 
-                lastDetectedTopic = topic;
+                lastDetectedTopic =
+                    courseTopic;
+
+
 
                 return makeNaturalResponse(
                     topicItem.answer,
-                    topic,
+                    courseTopic,
                     text
                 );
 
@@ -728,10 +1202,14 @@ function getAIResponse(userMessage) {
         }
 
 
-        // Jika ada beberapa topik,
-        // gunakan pencarian Knowledge Base
+
+        // Cari menggunakan scoring
         const result =
-            searchKnowledgeBase(text);
+            searchKnowledgeBase(
+                text,
+                lastDetectedTopic
+            );
+
 
 
         if (
@@ -750,12 +1228,56 @@ function getAIResponse(userMessage) {
     }
 
 
+
     // =========================
-    // PENCARIAN KNOWLEDGE BASE
+    // PERTANYAAN LANJUTAN
+    // =========================
+
+    if (
+        lastDetectedTopic
+    ) {
+
+        const contextualText =
+            text + " " +
+            topicAliases[lastDetectedTopic].join(" ");
+
+
+
+        const contextualResult =
+            searchKnowledgeBase(
+                contextualText,
+                lastDetectedTopic
+            );
+
+
+
+        if (
+            contextualResult.item &&
+            contextualResult.score >= MINIMUM_SCORE
+        ) {
+
+            return makeNaturalResponse(
+                contextualResult.item.answer,
+                "",
+                text
+            );
+
+        }
+
+    }
+
+
+
+    // =========================
+    // PENCARIAN TERAKHIR
     // =========================
 
     const result =
-        searchKnowledgeBase(text);
+        searchKnowledgeBase(
+            text,
+            lastDetectedTopic
+        );
+
 
 
     if (
@@ -772,39 +1294,22 @@ function getAIResponse(userMessage) {
     }
 
 
-    // =========================
-    // KONTEKS PERTANYAAN SEBELUMNYA
-    // =========================
-
-    if (lastDetectedTopic) {
-
-        const previousTopicItem =
-            findKnowledgeItemByTopic(
-                lastDetectedTopic
-            );
-
-
-        if (previousTopicItem) {
-
-            return previousTopicItem.answer;
-
-        }
-
-    }
-
 
     // =========================
     // JAWABAN DEFAULT
     // =========================
 
     return (
-        "Maaf, informasi tersebut belum tersedia " +
+        "Maaf, saya belum menemukan informasi yang sesuai " +
         "dalam Knowledge Base Binar Komputer. " +
-        "Untuk mendapatkan informasi yang lebih tepat, " +
-        "silakan hubungi admin Binar Komputer melalui WhatsApp."
+        "Jika pertanyaannya berkaitan dengan kursus, " +
+        "pendaftaran, biaya, fasilitas, jadwal, atau informasi " +
+        "Binar Komputer lainnya, silakan coba gunakan kata kunci " +
+        "yang lebih spesifik atau hubungi admin."
     );
 
 }
+
 
 
 // =========================
@@ -823,6 +1328,7 @@ function formatAIResponse(answer) {
 }
 
 
+
 // =========================
 // WAKTU
 // =========================
@@ -831,13 +1337,47 @@ function getCurrentTime() {
 
     const now = new Date();
 
-    return now.toLocaleTimeString("id-ID", {
-        hour: "2-digit",
-        minute: "2-digit"
-    });
+    return now.toLocaleTimeString(
+        "id-ID",
+        {
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
 
 }
 
+// =========================
+// SIMPAN RIWAYAT KE GOOGLE SHEETS
+// =========================
+
+function saveChatToGoogleSheet(
+    question,
+    answer,
+    status = "Terjawab"
+) {
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+            question: question,
+            answer: answer,
+            status: status
+        })
+    }).catch(function (error) {
+
+        console.error(
+            "Gagal menyimpan riwayat:",
+            error
+        );
+
+    });
+
+}
 
 // =========================
 // TOMBOL COPY
@@ -849,9 +1389,14 @@ function createCopyButton(answer) {
         document.createElement("button");
 
 
-    button.classList.add("copy-button");
 
-    button.textContent = "📋 Copy";
+    button.classList.add(
+        "copy-button"
+    );
+
+    button.textContent =
+        "📋 Copy";
+
 
 
     button.addEventListener(
@@ -865,8 +1410,10 @@ function createCopyButton(answer) {
                 );
 
 
+
                 button.textContent =
                     "✓ Copied!";
+
 
 
                 setTimeout(
@@ -880,6 +1427,7 @@ function createCopyButton(answer) {
                 );
 
 
+
             } catch (error) {
 
                 button.textContent =
@@ -891,8 +1439,10 @@ function createCopyButton(answer) {
     );
 
 
+
     return button;
 }
+
 
 
 // =========================
@@ -905,10 +1455,14 @@ function createAdminButton() {
         document.createElement("button");
 
 
-    button.classList.add("admin-button");
+
+    button.classList.add(
+        "admin-button"
+    );
 
     button.textContent =
         "💬 Hubungi Admin";
+
 
 
     button.addEventListener(
@@ -919,15 +1473,20 @@ function createAdminButton() {
                 "6285601730788";
 
 
+
             const message =
                 "Halo Binar Komputer, saya ingin bertanya mengenai kursus.";
+
 
 
             const whatsappURL =
                 "https://wa.me/" +
                 phoneNumber +
                 "?text=" +
-                encodeURIComponent(message);
+                encodeURIComponent(
+                    message
+                );
+
 
 
             window.open(
@@ -939,21 +1498,27 @@ function createAdminButton() {
     );
 
 
+
     return button;
 }
+
 
 
 // =========================
 // PERTANYAAN OTOMATIS
 // =========================
 
-function getSuggestedQuestions(userMessage) {
+function getSuggestedQuestions(
+    userMessage
+) {
 
     const text =
-        normalizeText(userMessage);
+        normalizeText(
+            userMessage
+        );
 
 
-    // Microsoft Office
+
     if (
         containsAny(
             text,
@@ -970,7 +1535,7 @@ function getSuggestedQuestions(userMessage) {
     }
 
 
-    // Desain
+
     if (
         containsAny(
             text,
@@ -987,7 +1552,7 @@ function getSuggestedQuestions(userMessage) {
     }
 
 
-    // Website
+
     if (
         containsAny(
             text,
@@ -1004,7 +1569,7 @@ function getSuggestedQuestions(userMessage) {
     }
 
 
-    // Biaya
+
     if (
         containsAny(
             text,
@@ -1021,7 +1586,7 @@ function getSuggestedQuestions(userMessage) {
     }
 
 
-    // Pendaftaran
+
     if (
         containsAny(
             text,
@@ -1038,7 +1603,7 @@ function getSuggestedQuestions(userMessage) {
     }
 
 
-    // Lokasi
+
     if (
         containsAny(
             text,
@@ -1055,6 +1620,7 @@ function getSuggestedQuestions(userMessage) {
     }
 
 
+
     return [
         "Apa saja kursus yang tersedia?",
         "Berapa biaya kursus?",
@@ -1064,11 +1630,14 @@ function getSuggestedQuestions(userMessage) {
 }
 
 
+
 // =========================
 // MEMBUAT SARAN PERTANYAAN
 // =========================
 
-function createSuggestions(userMessage) {
+function createSuggestions(
+    userMessage
+) {
 
     const suggestions =
         getSuggestedQuestions(
@@ -1076,8 +1645,12 @@ function createSuggestions(userMessage) {
         );
 
 
+
     const container =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
 
     container.classList.add(
@@ -1085,8 +1658,12 @@ function createSuggestions(userMessage) {
     );
 
 
+
     const title =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
 
     title.classList.add(
@@ -1094,11 +1671,16 @@ function createSuggestions(userMessage) {
     );
 
 
+
     title.textContent =
         "💡 Mungkin kamu juga ingin tahu:";
 
 
-    container.appendChild(title);
+
+    container.appendChild(
+        title
+    );
+
 
 
     suggestions.forEach(
@@ -1110,23 +1692,29 @@ function createSuggestions(userMessage) {
                 );
 
 
+
             button.classList.add(
                 "suggestion-button"
             );
+
 
 
             button.textContent =
                 question;
 
 
+
             button.addEventListener(
                 "click",
                 function () {
 
-                    sendMessage(question);
+                    sendMessage(
+                        question
+                    );
 
                 }
             );
+
 
 
             container.appendChild(
@@ -1137,8 +1725,10 @@ function createSuggestions(userMessage) {
     );
 
 
+
     return container;
 }
+
 
 
 // =========================
@@ -1148,7 +1738,10 @@ function createSuggestions(userMessage) {
 function createTypingIndicator() {
 
     const typingBubble =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
 
     typingBubble.classList.add(
@@ -1156,6 +1749,7 @@ function createTypingIndicator() {
         "ai-message",
         "typing-bubble"
     );
+
 
 
     typingBubble.innerHTML = `
@@ -1171,24 +1765,32 @@ function createTypingIndicator() {
     `;
 
 
+
     return typingBubble;
 }
+
 
 
 // =========================
 // MENGIRIM PESAN
 // =========================
 
-function sendMessage(message = input.value) {
+function sendMessage(
+    message = input.value
+) {
 
     const userMessage =
         message.trim();
 
 
-    if (userMessage === "") {
-        return;
-    }
 
+    if (
+        userMessage === ""
+    ) {
+
+        return;
+
+    }
 
     // =========================
     // SUARA SEND
@@ -1196,7 +1798,10 @@ function sendMessage(message = input.value) {
 
     sendSound.currentTime = 0;
 
-    sendSound.play().catch(() => {});
+    sendSound.play().catch(
+        () => {}
+    );
+
 
 
     // =========================
@@ -1204,7 +1809,10 @@ function sendMessage(message = input.value) {
     // =========================
 
     const userBubble =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
 
     userBubble.classList.add(
@@ -1213,12 +1821,17 @@ function sendMessage(message = input.value) {
     );
 
 
+
     userBubble.textContent =
         userMessage;
 
 
+
     const userTime =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
 
     userTime.classList.add(
@@ -1226,8 +1839,10 @@ function sendMessage(message = input.value) {
     );
 
 
+
     userTime.textContent =
         getCurrentTime();
+
 
 
     userBubble.appendChild(
@@ -1235,15 +1850,19 @@ function sendMessage(message = input.value) {
     );
 
 
+
     chatBox.appendChild(
         userBubble
     );
 
 
+
     scrollToBottom();
 
 
+
     input.value = "";
+
 
 
     // =========================
@@ -1257,16 +1876,19 @@ function sendMessage(message = input.value) {
                 createTypingIndicator();
 
 
+
             chatBox.appendChild(
                 typingBubble
             );
 
 
+
             scrollToBottom();
 
 
+
             // =========================
-            // AI MEMBERIKAN JAWABAN
+            // AI MENJAWAB
             // =========================
 
             setTimeout(
@@ -1275,11 +1897,17 @@ function sendMessage(message = input.value) {
                     typingBubble.remove();
 
 
+
                     const answer =
                         getAIResponse(
                             userMessage
                         );
 
+                    saveChatToGoogleSheet(
+    userMessage,
+    answer,
+    "Terjawab"
+);
 
                     // =========================
                     // SUARA RECEIVE
@@ -1287,7 +1915,10 @@ function sendMessage(message = input.value) {
 
                     receiveSound.currentTime = 0;
 
-                    receiveSound.play().catch(() => {});
+                    receiveSound.play().catch(
+                        () => {}
+                    );
+
 
 
                     // =========================
@@ -1300,10 +1931,12 @@ function sendMessage(message = input.value) {
                         );
 
 
+
                     aiBubble.classList.add(
                         "message",
                         "ai-message"
                     );
+
 
 
                     // =========================
@@ -1316,15 +1949,18 @@ function sendMessage(message = input.value) {
                         );
 
 
+
                     answerText.innerHTML =
                         formatAIResponse(
                             answer
                         );
 
 
+
                     aiBubble.appendChild(
                         answerText
                     );
+
 
 
                     // =========================
@@ -1337,9 +1973,11 @@ function sendMessage(message = input.value) {
                         );
 
 
+
                     actionArea.classList.add(
                         "message-actions"
                     );
+
 
 
                     actionArea.appendChild(
@@ -1349,14 +1987,17 @@ function sendMessage(message = input.value) {
                     );
 
 
+
                     actionArea.appendChild(
                         createAdminButton()
                     );
 
 
+
                     aiBubble.appendChild(
                         actionArea
                     );
+
 
 
                     // =========================
@@ -1370,6 +2011,7 @@ function sendMessage(message = input.value) {
                     );
 
 
+
                     // =========================
                     // TIMESTAMP
                     // =========================
@@ -1380,13 +2022,16 @@ function sendMessage(message = input.value) {
                         );
 
 
+
                     aiTime.classList.add(
                         "message-time"
                     );
 
 
+
                     aiTime.textContent =
                         getCurrentTime();
+
 
 
                     aiBubble.appendChild(
@@ -1394,12 +2039,15 @@ function sendMessage(message = input.value) {
                     );
 
 
+
                     chatBox.appendChild(
                         aiBubble
                     );
 
 
+
                     scrollToBottom();
+
 
 
                 },
@@ -1407,11 +2055,13 @@ function sendMessage(message = input.value) {
             );
 
 
+
         },
         500
     );
 
 }
+
 
 
 // =========================
@@ -1422,6 +2072,7 @@ const darkModeButton =
     document.querySelector(
         "#darkModeButton"
     );
+
 
 
 if (darkModeButton) {
@@ -1435,6 +2086,7 @@ if (darkModeButton) {
             );
 
 
+
             if (
                 document.body.classList.contains(
                     "dark-mode"
@@ -1445,6 +2097,7 @@ if (darkModeButton) {
                     "☀️";
 
 
+
                 darkModeButton.title =
                     "Light Mode";
 
@@ -1452,6 +2105,7 @@ if (darkModeButton) {
 
                 darkModeButton.textContent =
                     "🌙";
+
 
 
                 darkModeButton.title =
@@ -1465,6 +2119,7 @@ if (darkModeButton) {
 }
 
 
+
 // =========================
 // CLEAR CHAT
 // =========================
@@ -1473,6 +2128,7 @@ const clearChatButton =
     document.querySelector(
         "#clearChatButton"
     );
+
 
 
 if (clearChatButton) {
@@ -1487,13 +2143,21 @@ if (clearChatButton) {
                 );
 
 
-            if (!confirmClear) {
+
+            if (
+                !confirmClear
+            ) {
+
                 return;
+
             }
 
 
-            // Reset konteks percakapan
-            lastDetectedTopic = "";
+
+            // Reset konteks
+            lastDetectedTopic =
+                "";
+
 
 
             chatBox.innerHTML = `
@@ -1520,12 +2184,13 @@ if (clearChatButton) {
             `;
 
 
-            // Aktifkan kembali quick reply
 
+            // Aktifkan kembali quick reply
             const newQuickReplies =
                 chatBox.querySelectorAll(
                     ".quick-replies button"
                 );
+
 
 
             newQuickReplies.forEach(
@@ -1546,6 +2211,7 @@ if (clearChatButton) {
             );
 
 
+
             input.value = "";
 
             input.focus();
@@ -1556,6 +2222,7 @@ if (clearChatButton) {
     );
 
 }
+
 
 
 // =========================
@@ -1572,6 +2239,7 @@ sendButton.addEventListener(
 );
 
 
+
 // =========================
 // ENTER UNTUK KIRIM
 // =========================
@@ -1580,7 +2248,9 @@ input.addEventListener(
     "keydown",
     function (event) {
 
-        if (event.key === "Enter") {
+        if (
+            event.key === "Enter"
+        ) {
 
             event.preventDefault();
 
@@ -1592,6 +2262,7 @@ input.addEventListener(
 );
 
 
+
 // =========================
 // QUICK REPLY
 // =========================
@@ -1600,6 +2271,7 @@ const quickReplies =
     document.querySelectorAll(
         ".quick-replies button"
     );
+
 
 
 quickReplies.forEach(

@@ -1802,69 +1802,66 @@ function sendMessage(
         () => {}
     );
 
+// =========================
+// BUBBLE USER
+// =========================
 
-
-    // =========================
-    // BUBBLE USER
-    // =========================
-
-    const userBubble =
-        document.createElement(
-            "div"
-        );
-
-
-
-    userBubble.classList.add(
-        "message",
-        "user-message"
+const userBubble =
+    document.createElement(
+        "div"
     );
 
 
 
-    userBubble.textContent =
-        userMessage;
+userBubble.classList.add(
+    "message",
+    "user-message"
+);
 
 
 
-    const userTime =
-        document.createElement(
-            "div"
-        );
+userBubble.textContent =
+    userMessage;
 
 
 
-    userTime.classList.add(
-        "message-time"
+const userTime =
+    document.createElement(
+        "div"
     );
 
 
 
-    userTime.textContent =
-        getCurrentTime();
+userTime.classList.add(
+    "message-time"
+);
 
 
 
-    userBubble.appendChild(
-        userTime
-    );
+userTime.textContent =
+    getCurrentTime();
 
 
 
-    chatBox.appendChild(
-        userBubble
-    );
+userBubble.appendChild(
+    userTime
+);
 
 
 
-    scrollToBottom();
+chatBox.appendChild(
+    userBubble
+);
 
+saveUserHistory(
+    "user",
+    userMessage
+);
 
+scrollToBottom();
 
-    input.value = "";
-
-
-
+input.value = "";
+    
     // =========================
     // TYPING INDICATOR
     // =========================
@@ -2044,6 +2041,10 @@ function sendMessage(
                         aiBubble
                     );
 
+                    saveUserHistory(
+                    "ai",
+                    answer
+                    );
 
 
                     scrollToBottom();
@@ -2290,3 +2291,292 @@ quickReplies.forEach(
 
     }
 );
+// =========================
+// MENU DROPDOWN
+// =========================
+
+const menuButton = document.querySelector("#menuButton");
+const menuDropdown = document.querySelector("#menuDropdown");
+
+if (menuButton && menuDropdown) {
+
+    menuButton.addEventListener("click", function (event) {
+
+        event.stopPropagation();
+
+        menuDropdown.classList.toggle("show");
+
+    });
+
+
+    document.addEventListener("click", function (event) {
+
+        if (
+            !menuDropdown.contains(event.target) &&
+            event.target !== menuButton
+        ) {
+
+            menuDropdown.classList.remove("show");
+
+        }
+
+    });
+
+}
+// =========================
+// RIWAYAT CHAT USER
+// =========================
+
+const CHAT_HISTORY_KEY = "binarAIChatHistory";
+
+const chatHistoryButton = document.querySelector("#chatHistoryButton");
+const historyModal = document.querySelector("#historyModal");
+const closeHistoryButton = document.querySelector("#closeHistoryButton");
+const historyList = document.querySelector("#historyList");
+
+
+function saveUserHistory(role, text) {
+
+    try {
+
+        const history = JSON.parse(
+            localStorage.getItem(CHAT_HISTORY_KEY) || "[]"
+        );
+
+        history.push({
+            role: role,
+            text: text,
+            time: new Date().toLocaleString("id-ID")
+        });
+
+        // Simpan maksimal 100 pesan
+        const limitedHistory = history.slice(-100);
+
+        localStorage.setItem(
+            CHAT_HISTORY_KEY,
+            JSON.stringify(limitedHistory)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Gagal menyimpan riwayat chat:",
+            error
+        );
+
+    }
+
+}
+
+
+function showChatHistory() {
+
+    if (!historyList) return;
+
+    historyList.innerHTML = "";
+
+    let history = [];
+
+    try {
+
+        history = JSON.parse(
+            localStorage.getItem(CHAT_HISTORY_KEY) || "[]"
+        );
+
+    } catch (error) {
+
+        history = [];
+
+    }
+
+
+    if (history.length === 0) {
+
+        historyList.innerHTML = `
+            <p class="empty-history">
+                Belum ada riwayat chat.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    history.forEach(function(item) {
+
+        const historyItem = document.createElement("div");
+
+        historyItem.className =
+            "history-item " +
+            (item.role === "user" ? "user" : "ai");
+
+
+        const roleText =
+            item.role === "user"
+                ? "Kamu"
+                : "Binar Komputer Assistant";
+
+
+        historyItem.innerHTML = `
+            <div class="history-role">
+                ${roleText}
+            </div>
+
+            <div>
+                ${item.text}
+            </div>
+
+            <div class="history-time">
+                ${item.time}
+            </div>
+        `;
+
+
+        historyList.appendChild(historyItem);
+
+    });
+
+}
+
+
+if (chatHistoryButton && historyModal) {
+
+    chatHistoryButton.addEventListener(
+        "click",
+        function() {
+
+            showChatHistory();
+
+            historyModal.classList.add("show");
+
+            if (menuDropdown) {
+                menuDropdown.classList.remove("show");
+            }
+
+        }
+    );
+
+}
+
+
+if (closeHistoryButton && historyModal) {
+
+    closeHistoryButton.addEventListener(
+        "click",
+        function() {
+
+            historyModal.classList.remove("show");
+
+        }
+    );
+
+}
+
+
+if (historyModal) {
+
+    historyModal.addEventListener(
+        "click",
+        function(event) {
+
+            if (event.target === historyModal) {
+
+                historyModal.classList.remove("show");
+
+            }
+
+        }
+    );
+
+}
+
+// =========================
+// HAPUS RIWAYAT CHAT USER
+// =========================
+
+const deleteHistoryButton =
+    document.querySelector(
+        "#deleteHistoryButton"
+    );
+
+
+if (deleteHistoryButton) {
+
+    deleteHistoryButton.addEventListener(
+        "click",
+        function () {
+
+            const confirmDelete =
+                confirm(
+                    "Yakin ingin menghapus semua riwayat chat?"
+                );
+
+
+            if (!confirmDelete) {
+                return;
+            }
+
+
+            localStorage.removeItem(
+                CHAT_HISTORY_KEY
+            );
+
+
+            if (historyList) {
+
+                historyList.innerHTML = `
+                    <p class="empty-history">
+                        Belum ada riwayat chat.
+                    </p>
+                `;
+
+            }
+
+
+            if (menuDropdown) {
+
+                menuDropdown.classList.remove(
+                    "show"
+                );
+
+            }
+
+
+            alert(
+                "Riwayat chat berhasil dihapus."
+            );
+
+        }
+    );
+
+}
+// =========================
+// TOMBOL KEMBALI KE WEBSITE
+// =========================
+
+const backHomeButton =
+    document.querySelector("#backHomeButton");
+
+if (backHomeButton) {
+
+    backHomeButton.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                window.location.pathname.includes(
+                    "/02-AI-ASSISTANT/"
+                )
+            ) {
+
+                event.preventDefault();
+
+                window.location.href =
+                    "../01-WEBSITE/index.html";
+            }
+
+        }
+    );
+
+}

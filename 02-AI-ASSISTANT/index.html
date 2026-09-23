@@ -13,56 +13,94 @@
 <body>
 
     <div class="chat-container">
+<!-- =========================
+     HEADER
+     ========================= -->
 
-        <!-- =========================
-             HEADER
-             ========================= -->
-        <div class="chat-header">
+<div class="chat-header">
 
-            <!-- Bagian kiri -->
-            <div class="header-left">
+    <div class="header-left">
+        <a
+    href="../"
+    id="backHomeButton"
+    class="back-home-button"
+    title="Kembali ke Website">
+    ←
+</a>
 
-                <div class="profile-icon">
-                    👤
-                </div>
+        <div class="profile-icon">
 
-                <div class="header-title">
-                    <h2>Binar Komputer Assistant</h2>
-                    <p>Siap membantu Anda!</p>
-                </div>
+            <img
+                src="assets/logo-binar.jpeg"
+                alt="Logo Binar Komputer">
+
+        </div>
+
+        <div class="header-title">
+
+            <h2>Binar Komputer</h2>
+
+            <div class="online-status">
+
+                <span class="online-dot"></span>
+
+                Online
 
             </div>
 
+        </div>
 
-            <!-- Bagian kanan -->
-            <div class="header-right">
+    </div>
 
-                <div class="online-status">
-                    <span class="online-dot"></span>
-                    Online
-                </div>
 
-                <!-- Tombol Dark Mode -->
-                <button
-                    id="darkModeButton"
-                    class="header-button"
-                    title="Dark Mode">
-                    🌙
-                </button>
+    <div class="header-right">
 
-                <!-- Tombol Clear Chat -->
+        <div class="menu-wrapper">
+
+            <button
+                id="menuButton"
+                class="header-button menu-button"
+                title="Menu">
+                ⋮
+            </button>
+
+
+            <div
+                id="menuDropdown"
+                class="menu-dropdown">
+
                 <button
                     id="clearChatButton"
-                    class="header-button"
-                    title="Bersihkan Chat">
-                    🗑️
+                    class="menu-item">
+                    🗑️ Bersihkan Chat
+                </button>
+
+                <button
+                    id="darkModeButton"
+                    class="menu-item">
+                    🌙 Mode Gelap
+                </button>
+
+                <button
+                    id="chatHistoryButton"
+                    class="menu-item">
+                    💬 Riwayat Chat
+                </button>
+
+                <button
+                    id="deleteHistoryButton"
+                    class="menu-item">
+                    🗑️ Hapus Riwayat Chat
                 </button>
 
             </div>
 
         </div>
 
+    </div>
 
+</div>
+          
         <!-- =========================
              AREA PERCAKAPAN
              ========================= -->
@@ -107,7 +145,35 @@
         </div>
 
     </div>
+<!-- =========================
+     RIWAYAT CHAT
+     ========================= -->
 
+<div id="historyModal" class="history-modal">
+
+    <div class="history-panel">
+
+        <div class="history-header">
+
+            <h3>💬 Riwayat Chat</h3>
+
+            <button id="closeHistoryButton">
+                ×
+            </button>
+
+        </div>
+
+        <div id="historyList" class="history-list">
+
+            <p class="empty-history">
+                Belum ada riwayat chat.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
 
     <!-- JavaScript -->
     <script src="knowledge.js"></script>

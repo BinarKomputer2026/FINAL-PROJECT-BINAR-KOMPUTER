@@ -763,23 +763,30 @@ body.dark-mode .suggestions-title {
 
 @media (max-width: 600px) {
 
-    .chat-container {
+    html,
+    body {
         width: 100%;
-        height: 100vh;
+        height: 100%;
         margin: 0;
-        border-radius: 0;
-        display: flex;
-        flex-direction: column;
+        overflow: hidden;
     }
 
-    .chat-box {
-        flex: 1;
-        height: auto;
-        min-height: 0;
+    .chat-container {
+        width: 100%;
+        height: 100dvh;
+        max-height: 100dvh;
+        margin: 0;
+        border-radius: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: hidden;
     }
 
     .chat-header {
         padding: 12px 14px;
+        flex-shrink: 0;
     }
 
     .profile-icon {
@@ -796,9 +803,18 @@ body.dark-mode .suggestions-title {
     }
 
     .back-home-button {
-        width: 25px;
-        height: 25px;
-        font-size: 14px;
+        width: 28px;
+        height: 28px;
+        font-size: 17px;
+    }
+
+    .chat-box {
+        flex: 1;
+        min-height: 0;
+        height: auto;
+
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .message {
@@ -810,7 +826,235 @@ body.dark-mode .suggestions-title {
     }
 
     .chat-input {
+        flex-shrink: 0;
         padding: 10px;
+    }
+
+}
+/* =========================
+   DARK MODE
+   ========================= */
+
+body.dark-mode {
+    background-color: #121212;
+}
+
+/* Container chat */
+
+body.dark-mode .chat-container {
+    background-color: #1e1e1e;
+}
+
+/* Header */
+
+body.dark-mode .chat-header {
+    background-color: #1565c0;
+}
+
+/* Area chat */
+
+body.dark-mode .chat-box {
+    background-color: #181818;
+}
+
+/* Bubble AI */
+
+body.dark-mode .ai-message {
+    background-color: #2b2b2b;
+    color: #f1f1f1;
+}
+
+/* Bubble User */
+
+body.dark-mode .user-message {
+    background-color: #1976d2;
+    color: white;
+}
+
+/* Input */
+
+body.dark-mode .chat-input {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .chat-input input {
+    background-color: #2b2b2b;
+    color: white;
+    border-color: #444;
+}
+
+body.dark-mode .chat-input input::placeholder {
+    color: #aaa;
+}
+
+/* Menu */
+
+body.dark-mode .menu-dropdown {
+    background-color: #252525;
+}
+
+body.dark-mode .menu-item {
+    color: #f1f1f1;
+}
+
+body.dark-mode .menu-item:hover {
+    background-color: #333;
+}
+
+/* Riwayat Chat */
+
+body.dark-mode .history-panel {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+body.dark-mode .history-list {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .history-item.user {
+    background-color: #263f5a;
+    color: white;
+}
+
+body.dark-mode .history-item.ai {
+    background-color: #2b2b2b;
+    color: white;
+}
+
+body.dark-mode .empty-history {
+    color: #aaa;
+}
+/* =========================
+   ANIMASI CHAT BUBBLE
+   ========================= */
+
+@keyframes bubbleAI {
+
+    from {
+        opacity: 0;
+        transform: translateX(-12px) translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+
+}
+
+
+@keyframes bubbleUser {
+
+    from {
+        opacity: 0;
+        transform: translateX(12px) translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+
+}
+
+
+/* Bubble AI */
+
+.ai-message {
+    animation: bubbleAI 0.3s ease-out;
+}
+
+
+/* Bubble User */
+
+.user-message {
+    animation: bubbleUser 0.3s ease-out;
+}
+/* =========================
+   HOVER BUBBLE
+   ========================= */
+
+.message {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.ai-message:hover,
+.user-message:hover {
+    transform: translateY(-1px);
+}
+/* =========================
+   TOMBOL SCROLL KE BAWAH
+   ========================= */
+
+.scroll-bottom-button {
+    position: absolute;
+
+    bottom: 85px;
+    right: 20px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: white;
+    color: #2196f3;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+
+    z-index: 20;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.scroll-bottom-button.show {
+    display: flex;
+}
+
+.scroll-bottom-button:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   DARK MODE
+   ========================= */
+
+body.dark-mode .scroll-bottom-button {
+    background-color: #2b2b2b;
+    color: #64b5f6;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .scroll-bottom-button {
+        width: 34px;
+        height: 34px;
+
+        right: 15px;
+        bottom: 75px;
+
+        font-size: 18px;
     }
 
 }

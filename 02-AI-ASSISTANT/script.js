@@ -32,7 +32,55 @@ let lastDetectedTopic = "";
 function scrollToBottom() {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+// =========================
+// TOMBOL SCROLL KE BAWAH
+// =========================
 
+const scrollBottomButton =
+    document.querySelector(
+        "#scrollBottomButton"
+    );
+
+if (scrollBottomButton) {
+
+    chatBox.addEventListener(
+        "scroll",
+        function () {
+
+            const isNearBottom =
+                chatBox.scrollHeight -
+                chatBox.scrollTop -
+                chatBox.clientHeight <
+                100;
+
+            if (isNearBottom) {
+
+                scrollBottomButton.classList.remove(
+                    "show"
+                );
+
+            } else {
+
+                scrollBottomButton.classList.add(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+
+    scrollBottomButton.addEventListener(
+        "click",
+        function () {
+
+            scrollToBottom();
+
+        }
+    );
+
+}
 
 
 // =========================
@@ -381,6 +429,26 @@ const intentAliases = {
         "kursus apa",
         "program apa",
         "ada kursus"
+    ],
+        beginner: [
+        "pemula",
+        "masih pemula",
+        "baru belajar",
+        "baru mulai",
+        "belajar dari nol",
+        "dari nol",
+        "belum bisa komputer",
+        "belum bisa",
+        "tidak bisa komputer",
+        "nggak bisa komputer",
+        "belajar komputer",
+        "mau belajar komputer",
+        "ingin belajar komputer",
+        "mulai belajar komputer",
+        "cocok untuk saya",
+        "cocok buat saya",
+        "cocok untuk pemula",
+        "cocok buat pemula"
     ]
 
 };
@@ -422,20 +490,19 @@ function detectTopics(text) {
 function detectPrimaryIntent(text) {
 
     const intentPriority = [
-        "payment",
-        "price",
-        "requirement",
-        "registration",
-        "location",
-        "schedule",
-        "duration",
-        "facility",
-        "contact",
-        "instagram",
-        "courseInfo"
-    ];
-
-
+    "payment",
+    "price",
+    "requirement",
+    "registration",
+    "location",
+    "schedule",
+    "duration",
+    "facility",
+    "contact",
+    "instagram",
+    "beginner",
+    "courseInfo"
+];
 
     for (let i = 0; i < intentPriority.length; i++) {
 
@@ -833,6 +900,17 @@ function detectCourseTopic(text) {
 // =========================
 
 function makeNaturalResponse(answer, topic, text) {
+        if (topic === "beginner") {
+
+    return (
+        "Tentu 😊 Kalau kamu masih baru belajar komputer, " +
+        "kamu bisa mulai dari Microsoft Office Dasar. " +
+        "Di program ini kamu belajar Microsoft Office dari dasar, " +
+        "jadi cocok untuk yang masih pemula. " +
+        "Kalau tertarik, kamu juga bisa langsung daftar melalui " +
+        "formulir pendaftaran Binar Komputer ya."
+    );
+}
 
     // =========================
     // PENDAFTARAN
@@ -1133,73 +1211,68 @@ function getAIResponse(userMessage) {
 
 
 
-    // =========================
-    // JIKA ADA INTENT SPESIFIK
-    // =========================
+   // =========================
+// JIKA ADA INTENT SPESIFIK
+// =========================
 
-    if (primaryIntent) {
+if (primaryIntent) {
 
-        const specificItem =
-            findKnowledgeItemByTopic(
-                primaryIntent
-            );
+    if (primaryIntent === "beginner") {
+        lastDetectedTopic = "office";
 
-
-
-        if (specificItem) {
-
-            lastDetectedTopic =
-                courseTopic ||
-                primaryIntent;
-
-
-
-            return makeNaturalResponse(
-                specificItem.answer,
-                primaryIntent,
-                text
-            );
-
-        }
-
+        return makeNaturalResponse(
+            "",
+            "beginner",
+            text
+        );
     }
 
+    const specificItem =
+        findKnowledgeItemByTopic(
+            primaryIntent
+        );
 
+    if (specificItem) {
 
-    // =========================
-    // JIKA HANYA MENYEBUT TOPIK
-    // =========================
+        lastDetectedTopic =
+            courseTopic || primaryIntent;
 
-    if (
-        detectedTopics.length > 0
-    ) {
+        return makeNaturalResponse(
+            specificItem.answer,
+            primaryIntent,
+            text
+        );
+    }
+}   // ← INI YANG KURANG
 
-        // Jika ada topik kursus
-        if (courseTopic) {
+// =========================
+// JIKA HANYA MENYEBUT TOPIK
+// =========================
 
-            const topicItem =
-                findKnowledgeItemByTopic(
-                    courseTopic
-                );
+if (
+    detectedTopics.length > 0
+) {
 
+    // Jika ada topik kursus
+    if (courseTopic) {
 
+        const topicItem =
+            findKnowledgeItemByTopic(
+                courseTopic
+            );
 
-            if (topicItem) {
+        if (topicItem) {
 
-                lastDetectedTopic =
-                    courseTopic;
+            lastDetectedTopic =
+                courseTopic;
 
-
-
-                return makeNaturalResponse(
-                    topicItem.answer,
-                    courseTopic,
-                    text
-                );
-
-            }
-
+            return makeNaturalResponse(
+                topicItem.answer,
+                courseTopic,
+                text
+            );
         }
+    }
 
 
 
